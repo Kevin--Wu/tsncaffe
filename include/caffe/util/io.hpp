@@ -5,8 +5,8 @@
 #include <string>
 
 #include "google/protobuf/message.h"
-#include "hdf5.h"
-#include "hdf5_hl.h"
+#include "hdf5/serial/hdf5.h"
+#include "hdf5/serial/hdf5_hl.h"
 
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
