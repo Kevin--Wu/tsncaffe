@@ -6,12 +6,12 @@ layer {
   top: "label"
   video_data_param {
     source: "/home/hadoop/whx/dataset/ucf101/train_flow_split1.txt"
-    batch_size: 32
+    batch_size: 24
     new_length: 5
     num_segments: 3
     modality: FLOW
     shuffle: true
-    name_pattern: "flow_%c_%05d.jpg"
+    name_pattern: "flow_%c_%04d.jpg"
   }
   transform_param{
     crop_size: 224
@@ -37,7 +37,7 @@ layer {
     new_length: 5
     num_segments: 3
     modality: FLOW
-    name_pattern: "flow_%c_%05d.jpg"
+    name_pattern: "flow_%c_%04d.jpg"
   }
   transform_param{
     crop_size: 224
