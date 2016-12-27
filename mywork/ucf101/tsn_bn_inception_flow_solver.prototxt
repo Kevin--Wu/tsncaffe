@@ -13,11 +13,11 @@ snapshot_prefix: "/home/hadoop/whx/tsncaffe/mywork/ucf101/snapshot/ucf101_split1
 debug_info: false
 
 # learning rate
-base_lr: 0.01
+base_lr: 0.005
 lr_policy: "multistep"
 gamma: 0.1
-stepvalue: [10000, 20000,30000]
-max_iter: 45000
+stepvalue: [10000, 20000,30000,50000]
+max_iter: 80000
 iter_size: 1
 
 # parameter of SGD
