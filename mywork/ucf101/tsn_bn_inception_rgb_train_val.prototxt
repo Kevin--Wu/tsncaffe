@@ -5,13 +5,13 @@ layer {
   top: "data"
   top: "label"
   video_data_param {
-    source: "data/ucf101_rgb_train_split_1.txt"
+    source: "/home/hadoop/whx/dataset/ucf101/train_rgb_split1.txt"
     batch_size: 32
     new_length: 1
     num_segments: 3
     modality: RGB
     shuffle: true
-    name_pattern: "img_%05d.jpg"
+    name_pattern: "frame%06d.jpg"
   }
   transform_param{
     crop_size: 224
@@ -32,12 +32,12 @@ layer {
   top: "data"
   top: "label"
   video_data_param {
-    source: "data/ucf101_rgb_val_split_1.txt"
+    source: "/home/hadoop/whx/dataset/ucf101/val_rgb_split1.txt"
     batch_size: 1
     new_length: 1
     num_segments: 3
     modality: RGB
-    name_pattern: "img_%05d.jpg"
+    name_pattern: "frame%06d.jpg"
   }
   transform_param{
     crop_size: 224
