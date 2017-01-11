@@ -18,7 +18,10 @@ def rgb_predict():
 
 	actdirs=os.listdir(data_root)
 	actid=0
+	print actdirs
 	for curact in actdirs:
+		print curact
+		print data_root+'/'+curact
 		if os.path.isdir(curact):
 			videodirs=os.listdir(data_root+'/'+curact)
 			for curvideo in videodirs:
@@ -37,3 +40,7 @@ def rgb_predict():
 	out = net.blobs['pool_fc'].data[...]
 	out = out[0][0][0]
 	out.argmax()+1
+	
+	return out	
+
+rgb_predict()
