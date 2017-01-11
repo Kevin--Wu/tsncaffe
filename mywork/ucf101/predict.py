@@ -5,6 +5,7 @@ import numpy as np
 import scipy
 import sys
 import os
+import random
 
 def rgb_predict():
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf_videoframedata_jpeg/'
@@ -25,7 +26,11 @@ def rgb_predict():
 				if os.path.isdir(data_root+curact+'/'+curvideo):
 					framelist=os.listdir(data_root+curact+'/'+curvideo)
 					framelist.sort()
-					print len(framelist)
+					framenum = len(framelist)
+					frameid = random.randint(1,framenum/3)
+					image1path=data_root+curact+'/'+curvideo+'/'+('frame%06d.jpg'.format(frameid))
+					image2path=data_root+curact+'/'+curvideo+'/'+('frame%06d.jpg'.format(frameid+framenum/3))
+					print image2path
 
 	image1=caffe.io.load_image(data_root + 'PlayingViolin/v_PlayingViolin_g01_c01/frame000001.jpg')
 	image2=caffe.io.load_image(data_root + 'PlayingViolin/v_PlayingViolin_g01_c01/frame000010.jpg')
