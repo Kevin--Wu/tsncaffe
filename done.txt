@@ -23356,3 +23356,445 @@ I0111 11:44:00.766409  4932 solver.cpp:255]     Train net output #0: loss = 0.00
 I0111 11:44:00.766420  4932 solver.cpp:631] Iteration 70640, lr = 1e-08
 I0111 11:44:03.323801  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.6239 > 20) by scale factor 0.780523
 I0111 11:44:12.203228  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.7217 > 20) by scale factor 0.880216
+I0111 11:44:23.296802  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.3514 > 20) by scale factor 0.821308
+I0111 11:44:45.145604  4932 solver.cpp:240] Iteration 70660, loss = 0.066042
+I0111 11:44:45.145684  4932 solver.cpp:255]     Train net output #0: loss = 0.000325651 (* 1 = 0.000325651 loss)
+I0111 11:44:45.145695  4932 solver.cpp:631] Iteration 70660, lr = 1e-08
+I0111 11:44:47.702963  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.7213 > 20) by scale factor 0.809021
+I0111 11:45:23.213367  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.8094 > 20) by scale factor 0.917034
+I0111 11:45:29.531385  4932 solver.cpp:240] Iteration 70680, loss = 0.0867342
+I0111 11:45:29.531425  4932 solver.cpp:255]     Train net output #0: loss = 0.126819 (* 1 = 0.126819 loss)
+I0111 11:45:29.531435  4932 solver.cpp:631] Iteration 70680, lr = 1e-08
+I0111 11:45:47.626303  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.4412 > 20) by scale factor 0.756397
+I0111 11:46:07.608494  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.7016 > 20) by scale factor 0.749019
+I0111 11:46:13.926304  4932 solver.cpp:240] Iteration 70700, loss = 0.0659717
+I0111 11:46:13.926342  4932 solver.cpp:255]     Train net output #0: loss = 0.0806157 (* 1 = 0.0806157 loss)
+I0111 11:46:13.926352  4932 solver.cpp:631] Iteration 70700, lr = 1e-08
+I0111 11:46:20.922552  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.3639 > 20) by scale factor 0.982129
+I0111 11:46:43.117970  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.1711 > 20) by scale factor 0.827436
+I0111 11:46:47.578583  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.3582 > 20) by scale factor 0.82108
+I0111 11:46:58.333634  4932 solver.cpp:240] Iteration 70720, loss = 0.108003
+I0111 11:46:58.333673  4932 solver.cpp:255]     Train net output #0: loss = 8.43587e-05 (* 1 = 8.43587e-05 loss)
+I0111 11:46:58.333683  4932 solver.cpp:631] Iteration 70720, lr = 1e-08
+I0111 11:47:18.646733  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.6477 > 20) by scale factor 0.845748
+I0111 11:47:31.962648  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.1742 > 20) by scale factor 0.991367
+I0111 11:47:42.724354  4932 solver.cpp:240] Iteration 70740, loss = 0.0976035
+I0111 11:47:42.724402  4932 solver.cpp:255]     Train net output #0: loss = 0.00253491 (* 1 = 0.00253491 loss)
+I0111 11:47:42.724414  4932 solver.cpp:631] Iteration 70740, lr = 1e-08
+I0111 11:47:45.285068  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.1788 > 20) by scale factor 0.794319
+I0111 11:48:30.399230  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.2032 > 20) by scale factor 0.943255
+I0111 11:48:34.892808  4932 solver.cpp:240] Iteration 70760, loss = 0.0556305
+I0111 11:48:34.892846  4932 solver.cpp:255]     Train net output #0: loss = 0.0146406 (* 1 = 0.0146406 loss)
+I0111 11:48:34.892856  4932 solver.cpp:631] Iteration 70760, lr = 1e-08
+I0111 11:48:48.544421  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.5284 > 20) by scale factor 0.974259
+I0111 11:49:19.266063  4932 solver.cpp:240] Iteration 70780, loss = 0.0595154
+I0111 11:49:19.266175  4932 solver.cpp:255]     Train net output #0: loss = 0.0783211 (* 1 = 0.0783211 loss)
+I0111 11:49:19.266191  4932 solver.cpp:631] Iteration 70780, lr = 1e-08
+I0111 11:49:30.700562  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.2646 > 20) by scale factor 0.791621
+I0111 11:49:39.575222  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.8177 > 20) by scale factor 0.916686
+I0111 11:50:03.646678  4932 solver.cpp:240] Iteration 70800, loss = 0.0796725
+I0111 11:50:03.646769  4932 solver.cpp:255]     Train net output #0: loss = 0.0986252 (* 1 = 0.0986252 loss)
+I0111 11:50:03.646780  4932 solver.cpp:631] Iteration 70800, lr = 1e-08
+I0111 11:50:37.279230  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.855 > 20) by scale factor 0.875081
+I0111 11:50:46.158615  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.4837 > 20) by scale factor 0.976385
+I0111 11:50:48.041409  4932 solver.cpp:240] Iteration 70820, loss = 0.0757995
+I0111 11:50:48.041455  4932 solver.cpp:255]     Train net output #0: loss = 0.0191276 (* 1 = 0.0191276 loss)
+I0111 11:50:48.041465  4932 solver.cpp:631] Iteration 70820, lr = 1e-08
+I0111 11:50:50.603471  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.5434 > 20) by scale factor 0.887179
+I0111 11:50:57.261543  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.2902 > 20) by scale factor 0.939399
+I0111 11:51:26.103339  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.5017 > 20) by scale factor 0.851003
+I0111 11:51:32.424566  4932 solver.cpp:240] Iteration 70840, loss = 0.0645222
+I0111 11:51:32.424607  4932 solver.cpp:255]     Train net output #0: loss = 0.0306323 (* 1 = 0.0306323 loss)
+I0111 11:51:32.424615  4932 solver.cpp:631] Iteration 70840, lr = 1e-08
+I0111 11:52:16.821938  4932 solver.cpp:240] Iteration 70860, loss = 0.0350765
+I0111 11:52:16.822028  4932 solver.cpp:255]     Train net output #0: loss = 0.0156008 (* 1 = 0.0156008 loss)
+I0111 11:52:16.822041  4932 solver.cpp:631] Iteration 70860, lr = 1e-08
+I0111 11:53:01.198411  4932 solver.cpp:240] Iteration 70880, loss = 0.0612024
+I0111 11:53:01.198484  4932 solver.cpp:255]     Train net output #0: loss = 0.0613712 (* 1 = 0.0613712 loss)
+I0111 11:53:01.198495  4932 solver.cpp:631] Iteration 70880, lr = 1e-08
+I0111 11:53:45.565593  4932 solver.cpp:240] Iteration 70900, loss = 0.0430621
+I0111 11:53:45.565660  4932 solver.cpp:255]     Train net output #0: loss = 0.0262627 (* 1 = 0.0262627 loss)
+I0111 11:53:45.565670  4932 solver.cpp:631] Iteration 70900, lr = 1e-08
+I0111 11:53:48.122946  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 35.36 > 20) by scale factor 0.565611
+I0111 11:54:10.316970  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.9289 > 20) by scale factor 0.802282
+I0111 11:54:14.758324  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.0526 > 20) by scale factor 0.867582
+I0111 11:54:19.200341  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.014 > 20) by scale factor 0.768816
+I0111 11:54:28.076370  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.1319 > 20) by scale factor 0.993447
+I0111 11:54:29.958492  4932 solver.cpp:240] Iteration 70920, loss = 0.0960689
+I0111 11:54:29.958528  4932 solver.cpp:255]     Train net output #0: loss = 0.0630536 (* 1 = 0.0630536 loss)
+I0111 11:54:29.958540  4932 solver.cpp:631] Iteration 70920, lr = 1e-08
+I0111 11:55:14.345000  4932 solver.cpp:240] Iteration 70940, loss = 0.0381578
+I0111 11:55:14.345094  4932 solver.cpp:255]     Train net output #0: loss = 0.00825538 (* 1 = 0.00825538 loss)
+I0111 11:55:14.345105  4932 solver.cpp:631] Iteration 70940, lr = 1e-08
+I0111 11:55:30.214587  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.5707 > 20) by scale factor 0.782147
+I0111 11:55:58.724146  4932 solver.cpp:240] Iteration 70960, loss = 0.0778936
+I0111 11:55:58.724243  4932 solver.cpp:255]     Train net output #0: loss = 0.236832 (* 1 = 0.236832 loss)
+I0111 11:55:58.724257  4932 solver.cpp:631] Iteration 70960, lr = 1e-08
+I0111 11:56:01.282229  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.8087 > 20) by scale factor 0.876857
+I0111 11:56:32.344367  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.8839 > 20) by scale factor 0.957678
+I0111 11:56:43.108664  4932 solver.cpp:240] Iteration 70980, loss = 0.0769255
+I0111 11:56:43.108707  4932 solver.cpp:255]     Train net output #0: loss = 0.0540054 (* 1 = 0.0540054 loss)
+I0111 11:56:43.108717  4932 solver.cpp:631] Iteration 70980, lr = 1e-08
+I0111 11:57:25.624083  4932 solver.cpp:424] Iteration 71000, Testing net (#0)
+I0111 11:58:13.982519  4932 solver.cpp:481]     Test net output #0: accuracy = 0.843158
+I0111 11:58:13.982600  4932 solver.cpp:481]     Test net output #1: loss = 0.732801 (* 1 = 0.732801 loss)
+I0111 11:58:15.850106  4932 solver.cpp:240] Iteration 71000, loss = 0.0509632
+I0111 11:58:15.850143  4932 solver.cpp:255]     Train net output #0: loss = 0.00105884 (* 1 = 0.00105884 loss)
+I0111 11:58:15.850152  4932 solver.cpp:631] Iteration 71000, lr = 1e-08
+I0111 11:58:38.374541  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.3933 > 20) by scale factor 0.934873
+I0111 11:59:00.236409  4932 solver.cpp:240] Iteration 71020, loss = 0.0761179
+I0111 11:59:00.236507  4932 solver.cpp:255]     Train net output #0: loss = 0.0960852 (* 1 = 0.0960852 loss)
+I0111 11:59:00.236521  4932 solver.cpp:631] Iteration 71020, lr = 1e-08
+I0111 11:59:02.796409  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.6637 > 20) by scale factor 0.750083
+I0111 11:59:44.625041  4932 solver.cpp:240] Iteration 71040, loss = 0.0535642
+I0111 11:59:44.625136  4932 solver.cpp:255]     Train net output #0: loss = 0.060024 (* 1 = 0.060024 loss)
+I0111 11:59:44.625149  4932 solver.cpp:631] Iteration 71040, lr = 1e-08
+I0111 12:00:29.018708  4932 solver.cpp:240] Iteration 71060, loss = 0.0568148
+I0111 12:00:29.018793  4932 solver.cpp:255]     Train net output #0: loss = 0.0318648 (* 1 = 0.0318648 loss)
+I0111 12:00:29.018805  4932 solver.cpp:631] Iteration 71060, lr = 1e-08
+I0111 12:00:47.104531  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.5909 > 20) by scale factor 0.847783
+I0111 12:01:09.299866  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.5742 > 20) by scale factor 0.813863
+I0111 12:01:13.401690  4932 solver.cpp:240] Iteration 71080, loss = 0.0564839
+I0111 12:01:13.401726  4932 solver.cpp:255]     Train net output #0: loss = 0.111064 (* 1 = 0.111064 loss)
+I0111 12:01:13.401736  4932 solver.cpp:631] Iteration 71080, lr = 1e-08
+I0111 12:01:31.495210  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.318 > 20) by scale factor 0.857706
+I0111 12:01:57.784721  4932 solver.cpp:240] Iteration 71100, loss = 0.0625312
+I0111 12:01:57.784807  4932 solver.cpp:255]     Train net output #0: loss = 0.00568832 (* 1 = 0.00568832 loss)
+I0111 12:01:57.784819  4932 solver.cpp:631] Iteration 71100, lr = 1e-08
+I0111 12:02:15.875344  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.4399 > 20) by scale factor 0.978479
+I0111 12:02:42.169262  4932 solver.cpp:240] Iteration 71120, loss = 0.0614305
+I0111 12:02:42.169335  4932 solver.cpp:255]     Train net output #0: loss = 0.00262275 (* 1 = 0.00262275 loss)
+I0111 12:02:42.169347  4932 solver.cpp:631] Iteration 71120, lr = 1e-08
+I0111 12:03:26.547466  4932 solver.cpp:240] Iteration 71140, loss = 0.0650249
+I0111 12:03:26.547564  4932 solver.cpp:255]     Train net output #0: loss = 0.0435698 (* 1 = 0.0435698 loss)
+I0111 12:03:26.547575  4932 solver.cpp:631] Iteration 71140, lr = 1e-08
+I0111 12:03:35.767302  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.4974 > 20) by scale factor 0.75479
+I0111 12:03:42.426565  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.0936 > 20) by scale factor 0.948155
+I0111 12:04:10.938933  4932 solver.cpp:240] Iteration 71160, loss = 0.0562949
+I0111 12:04:10.939026  4932 solver.cpp:255]     Train net output #0: loss = 0.0840933 (* 1 = 0.0840933 loss)
+I0111 12:04:10.939039  4932 solver.cpp:631] Iteration 71160, lr = 1e-08
+I0111 12:04:55.329005  4932 solver.cpp:240] Iteration 71180, loss = 0.0406826
+I0111 12:04:55.329087  4932 solver.cpp:255]     Train net output #0: loss = 0.0106688 (* 1 = 0.0106688 loss)
+I0111 12:04:55.329098  4932 solver.cpp:631] Iteration 71180, lr = 1e-08
+I0111 12:05:22.294598  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.0432 > 20) by scale factor 0.867935
+I0111 12:05:39.711431  4932 solver.cpp:240] Iteration 71200, loss = 0.0720084
+I0111 12:05:39.711524  4932 solver.cpp:255]     Train net output #0: loss = 0.244143 (* 1 = 0.244143 loss)
+I0111 12:05:39.711537  4932 solver.cpp:631] Iteration 71200, lr = 1e-08
+I0111 12:06:24.095510  4932 solver.cpp:240] Iteration 71220, loss = 0.0438738
+I0111 12:06:24.095585  4932 solver.cpp:255]     Train net output #0: loss = 0.0267894 (* 1 = 0.0267894 loss)
+I0111 12:06:24.095597  4932 solver.cpp:631] Iteration 71220, lr = 1e-08
+I0111 12:06:55.502568  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.7873 > 20) by scale factor 0.775577
+I0111 12:07:08.483170  4932 solver.cpp:240] Iteration 71240, loss = 0.0631394
+I0111 12:07:08.483209  4932 solver.cpp:255]     Train net output #0: loss = 0.00146524 (* 1 = 0.00146524 loss)
+I0111 12:07:08.483219  4932 solver.cpp:631] Iteration 71240, lr = 1e-08
+I0111 12:07:35.457803  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.2359 > 20) by scale factor 0.792522
+I0111 12:07:48.773119  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.73 > 20) by scale factor 0.920388
+I0111 12:07:52.872776  4932 solver.cpp:240] Iteration 71260, loss = 0.0868478
+I0111 12:07:52.872814  4932 solver.cpp:255]     Train net output #0: loss = 0.00551278 (* 1 = 0.00551278 loss)
+I0111 12:07:52.872823  4932 solver.cpp:631] Iteration 71260, lr = 1e-08
+I0111 12:08:37.249620  4932 solver.cpp:240] Iteration 71280, loss = 0.054508
+I0111 12:08:37.249702  4932 solver.cpp:255]     Train net output #0: loss = 0.00269075 (* 1 = 0.00269075 loss)
+I0111 12:08:37.249714  4932 solver.cpp:631] Iteration 71280, lr = 1e-08
+I0111 12:09:21.635915  4932 solver.cpp:240] Iteration 71300, loss = 0.0520259
+I0111 12:09:21.636014  4932 solver.cpp:255]     Train net output #0: loss = 0.147049 (* 1 = 0.147049 loss)
+I0111 12:09:21.636029  4932 solver.cpp:631] Iteration 71300, lr = 1e-08
+I0111 12:09:21.976861  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.0847 > 20) by scale factor 0.995782
+I0111 12:10:06.015774  4932 solver.cpp:240] Iteration 71320, loss = 0.0574047
+I0111 12:10:06.015859  4932 solver.cpp:255]     Train net output #0: loss = 0.00110435 (* 1 = 0.00110435 loss)
+I0111 12:10:06.015873  4932 solver.cpp:631] Iteration 71320, lr = 1e-08
+I0111 12:10:19.666975  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.6062 > 20) by scale factor 0.781062
+I0111 12:10:46.294456  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.0293 > 20) by scale factor 0.799065
+I0111 12:10:50.397115  4932 solver.cpp:240] Iteration 71340, loss = 0.0935767
+I0111 12:10:50.397155  4932 solver.cpp:255]     Train net output #0: loss = 0.00901907 (* 1 = 0.00901907 loss)
+I0111 12:10:50.397164  4932 solver.cpp:631] Iteration 71340, lr = 1e-08
+I0111 12:10:52.956413  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 27.8305 > 20) by scale factor 0.718637
+I0111 12:11:34.777928  4932 solver.cpp:240] Iteration 71360, loss = 0.0694976
+I0111 12:11:34.778035  4932 solver.cpp:255]     Train net output #0: loss = 0.0110014 (* 1 = 0.0110014 loss)
+I0111 12:11:34.778048  4932 solver.cpp:631] Iteration 71360, lr = 1e-08
+I0111 12:11:37.335201  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.0111 > 20) by scale factor 0.908634
+I0111 12:11:48.430413  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.7056 > 20) by scale factor 0.965923
+I0111 12:12:19.159420  4932 solver.cpp:240] Iteration 71380, loss = 0.0868092
+I0111 12:12:19.159487  4932 solver.cpp:255]     Train net output #0: loss = 0.0236619 (* 1 = 0.0236619 loss)
+I0111 12:12:19.159497  4932 solver.cpp:631] Iteration 71380, lr = 1e-08
+I0111 12:13:03.534433  4932 solver.cpp:240] Iteration 71400, loss = 0.0493835
+I0111 12:13:03.534503  4932 solver.cpp:255]     Train net output #0: loss = 0.163078 (* 1 = 0.163078 loss)
+I0111 12:13:03.534513  4932 solver.cpp:631] Iteration 71400, lr = 1e-08
+I0111 12:13:08.309608  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.9423 > 20) by scale factor 0.801851
+I0111 12:13:19.410390  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.3447 > 20) by scale factor 0.983058
+I0111 12:13:32.730033  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.9912 > 20) by scale factor 0.869898
+I0111 12:13:47.922071  4932 solver.cpp:240] Iteration 71420, loss = 0.0600742
+I0111 12:13:47.922147  4932 solver.cpp:255]     Train net output #0: loss = 0.0464086 (* 1 = 0.0464086 loss)
+I0111 12:13:47.922158  4932 solver.cpp:631] Iteration 71420, lr = 1e-08
+I0111 12:13:54.923025  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.4821 > 20) by scale factor 0.976463
+I0111 12:14:01.580185  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.6031 > 20) by scale factor 0.884835
+I0111 12:14:06.019556  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.4975 > 20) by scale factor 0.851153
+I0111 12:14:32.315466  4932 solver.cpp:240] Iteration 71440, loss = 0.0734928
+I0111 12:14:32.315538  4932 solver.cpp:255]     Train net output #0: loss = 0.0102512 (* 1 = 0.0102512 loss)
+I0111 12:14:32.315549  4932 solver.cpp:631] Iteration 71440, lr = 1e-08
+I0111 12:15:08.162086  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.672 > 20) by scale factor 0.810635
+I0111 12:15:12.599772  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.1182 > 20) by scale factor 0.796237
+I0111 12:15:16.701104  4932 solver.cpp:240] Iteration 71460, loss = 0.131386
+I0111 12:15:16.701143  4932 solver.cpp:255]     Train net output #0: loss = 0.0491461 (* 1 = 0.0491461 loss)
+I0111 12:15:16.701153  4932 solver.cpp:631] Iteration 71460, lr = 1e-08
+I0111 12:15:41.451053  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.9414 > 20) by scale factor 0.871785
+I0111 12:15:52.557834  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.0419 > 20) by scale factor 0.767992
+I0111 12:16:01.102608  4932 solver.cpp:240] Iteration 71480, loss = 0.0584054
+I0111 12:16:01.102655  4932 solver.cpp:255]     Train net output #0: loss = 0.00229408 (* 1 = 0.00229408 loss)
+I0111 12:16:01.102668  4932 solver.cpp:631] Iteration 71480, lr = 1e-08
+I0111 12:16:08.100913  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.7531 > 20) by scale factor 0.841996
+I0111 12:16:45.481485  4932 solver.cpp:240] Iteration 71500, loss = 0.074665
+I0111 12:16:45.481544  4932 solver.cpp:255]     Train net output #0: loss = 0.170918 (* 1 = 0.170918 loss)
+I0111 12:16:45.481554  4932 solver.cpp:631] Iteration 71500, lr = 1e-08
+I0111 12:16:59.138062  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.4207 > 20) by scale factor 0.78676
+I0111 12:17:27.984673  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.4324 > 20) by scale factor 0.853518
+I0111 12:17:29.865922  4932 solver.cpp:240] Iteration 71520, loss = 0.0836638
+I0111 12:17:29.865967  4932 solver.cpp:255]     Train net output #0: loss = 0.0195992 (* 1 = 0.0195992 loss)
+I0111 12:17:29.865978  4932 solver.cpp:631] Iteration 71520, lr = 1e-08
+I0111 12:18:01.274411  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.5779 > 20) by scale factor 0.781925
+I0111 12:18:14.252668  4932 solver.cpp:240] Iteration 71540, loss = 0.0822394
+I0111 12:18:14.252710  4932 solver.cpp:255]     Train net output #0: loss = 0.0448518 (* 1 = 0.0448518 loss)
+I0111 12:18:14.252830  4932 solver.cpp:631] Iteration 71540, lr = 1e-08
+I0111 12:18:58.644198  4932 solver.cpp:240] Iteration 71560, loss = 0.0421158
+I0111 12:18:58.644284  4932 solver.cpp:255]     Train net output #0: loss = 0.00739257 (* 1 = 0.00739257 loss)
+I0111 12:18:58.644295  4932 solver.cpp:631] Iteration 71560, lr = 1e-08
+I0111 12:19:27.828181  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.6904 > 20) by scale factor 0.810031
+I0111 12:19:43.031057  4932 solver.cpp:240] Iteration 71580, loss = 0.043255
+I0111 12:19:43.031128  4932 solver.cpp:255]     Train net output #0: loss = 0.0198525 (* 1 = 0.0198525 loss)
+I0111 12:19:43.031138  4932 solver.cpp:631] Iteration 71580, lr = 1e-08
+I0111 12:19:45.589915  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.7976 > 20) by scale factor 0.961649
+I0111 12:20:27.418050  4932 solver.cpp:240] Iteration 71600, loss = 0.0324078
+I0111 12:20:27.418146  4932 solver.cpp:255]     Train net output #0: loss = 0.0840975 (* 1 = 0.0840975 loss)
+I0111 12:20:27.418160  4932 solver.cpp:631] Iteration 71600, lr = 1e-08
+I0111 12:20:47.730777  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.1528 > 20) by scale factor 0.764737
+I0111 12:21:03.269389  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.2076 > 20) by scale factor 0.861785
+I0111 12:21:05.491816  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.3763 > 20) by scale factor 0.758255
+I0111 12:21:11.813405  4932 solver.cpp:240] Iteration 71620, loss = 0.0857505
+I0111 12:21:11.813441  4932 solver.cpp:255]     Train net output #0: loss = 0.00272493 (* 1 = 0.00272493 loss)
+I0111 12:21:11.813449  4932 solver.cpp:631] Iteration 71620, lr = 1e-08
+I0111 12:21:56.201602  4932 solver.cpp:240] Iteration 71640, loss = 0.0441537
+I0111 12:21:56.201694  4932 solver.cpp:255]     Train net output #0: loss = 0.0556478 (* 1 = 0.0556478 loss)
+I0111 12:21:56.201705  4932 solver.cpp:631] Iteration 71640, lr = 1e-08
+I0111 12:22:00.979291  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.6663 > 20) by scale factor 0.923094
+I0111 12:22:16.513916  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 31.7313 > 20) by scale factor 0.630292
+I0111 12:22:29.831617  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.7225 > 20) by scale factor 0.965133
+I0111 12:22:40.587311  4932 solver.cpp:240] Iteration 71660, loss = 0.10421
+I0111 12:22:40.587357  4932 solver.cpp:255]     Train net output #0: loss = 0.00432965 (* 1 = 0.00432965 loss)
+I0111 12:22:40.587368  4932 solver.cpp:631] Iteration 71660, lr = 1e-08
+I0111 12:23:24.984746  4932 solver.cpp:240] Iteration 71680, loss = 0.0579333
+I0111 12:23:24.984827  4932 solver.cpp:255]     Train net output #0: loss = 0.0542203 (* 1 = 0.0542203 loss)
+I0111 12:23:24.984838  4932 solver.cpp:631] Iteration 71680, lr = 1e-08
+I0111 12:23:36.420315  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.9772 > 20) by scale factor 0.953417
+I0111 12:24:09.370621  4932 solver.cpp:240] Iteration 71700, loss = 0.070654
+I0111 12:24:09.370708  4932 solver.cpp:255]     Train net output #0: loss = 0.000245169 (* 1 = 0.000245169 loss)
+I0111 12:24:09.370720  4932 solver.cpp:631] Iteration 71700, lr = 1e-08
+I0111 12:24:53.743288  4932 solver.cpp:240] Iteration 71720, loss = 0.0378691
+I0111 12:24:53.743396  4932 solver.cpp:255]     Train net output #0: loss = 0.0122527 (* 1 = 0.0122527 loss)
+I0111 12:24:53.743412  4932 solver.cpp:631] Iteration 71720, lr = 1e-08
+I0111 12:24:58.518383  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.3143 > 20) by scale factor 0.938336
+I0111 12:25:38.123224  4932 solver.cpp:240] Iteration 71740, loss = 0.0490758
+I0111 12:25:38.123317  4932 solver.cpp:255]     Train net output #0: loss = 0.0223038 (* 1 = 0.0223038 loss)
+I0111 12:25:38.123327  4932 solver.cpp:631] Iteration 71740, lr = 1e-08
+I0111 12:26:07.305393  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.659 > 20) by scale factor 0.923404
+I0111 12:26:22.500952  4932 solver.cpp:240] Iteration 71760, loss = 0.0523495
+I0111 12:26:22.501039  4932 solver.cpp:255]     Train net output #0: loss = 0.325726 (* 1 = 0.325726 loss)
+I0111 12:26:22.501052  4932 solver.cpp:631] Iteration 71760, lr = 1e-08
+I0111 12:26:36.153939  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.8892 > 20) by scale factor 0.95743
+I0111 12:26:49.471253  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.0693 > 20) by scale factor 0.906235
+I0111 12:27:06.881969  4932 solver.cpp:240] Iteration 71780, loss = 0.0638966
+I0111 12:27:06.882046  4932 solver.cpp:255]     Train net output #0: loss = 0.0377019 (* 1 = 0.0377019 loss)
+I0111 12:27:06.882055  4932 solver.cpp:631] Iteration 71780, lr = 1e-08
+I0111 12:27:51.256351  4932 solver.cpp:240] Iteration 71800, loss = 0.0483461
+I0111 12:27:51.256415  4932 solver.cpp:255]     Train net output #0: loss = 0.00735263 (* 1 = 0.00735263 loss)
+I0111 12:27:51.256424  4932 solver.cpp:631] Iteration 71800, lr = 1e-08
+I0111 12:28:29.317368  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 28.662 > 20) by scale factor 0.697789
+I0111 12:28:35.637203  4932 solver.cpp:240] Iteration 71820, loss = 0.0735482
+I0111 12:28:35.637235  4932 solver.cpp:255]     Train net output #0: loss = 0.00331275 (* 1 = 0.00331275 loss)
+I0111 12:28:35.637244  4932 solver.cpp:631] Iteration 71820, lr = 1e-08
+I0111 12:28:53.724231  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.4749 > 20) by scale factor 0.785086
+I0111 12:29:00.380568  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.4017 > 20) by scale factor 0.854637
+I0111 12:29:20.021636  4932 solver.cpp:240] Iteration 71840, loss = 0.0842613
+I0111 12:29:20.021677  4932 solver.cpp:255]     Train net output #0: loss = 0.0707645 (* 1 = 0.0707645 loss)
+I0111 12:29:20.021685  4932 solver.cpp:631] Iteration 71840, lr = 1e-08
+I0111 12:30:04.385201  4932 solver.cpp:240] Iteration 71860, loss = 0.0553298
+I0111 12:30:04.385272  4932 solver.cpp:255]     Train net output #0: loss = 0.00964539 (* 1 = 0.00964539 loss)
+I0111 12:30:04.385282  4932 solver.cpp:631] Iteration 71860, lr = 1e-08
+I0111 12:30:48.761777  4932 solver.cpp:240] Iteration 71880, loss = 0.0426836
+I0111 12:30:48.761853  4932 solver.cpp:255]     Train net output #0: loss = 0.0448142 (* 1 = 0.0448142 loss)
+I0111 12:30:48.761864  4932 solver.cpp:631] Iteration 71880, lr = 1e-08
+I0111 12:30:57.973966  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 35.0531 > 20) by scale factor 0.570563
+I0111 12:31:33.137603  4932 solver.cpp:240] Iteration 71900, loss = 0.073685
+I0111 12:31:33.137691  4932 solver.cpp:255]     Train net output #0: loss = 0.0174321 (* 1 = 0.0174321 loss)
+I0111 12:31:33.137703  4932 solver.cpp:631] Iteration 71900, lr = 1e-08
+I0111 12:31:55.661453  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.5063 > 20) by scale factor 0.975311
+I0111 12:32:15.633507  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 28.6832 > 20) by scale factor 0.697273
+I0111 12:32:17.514943  4932 solver.cpp:240] Iteration 71920, loss = 0.0718286
+I0111 12:32:17.514982  4932 solver.cpp:255]     Train net output #0: loss = 0.00345721 (* 1 = 0.00345721 loss)
+I0111 12:32:17.514991  4932 solver.cpp:631] Iteration 71920, lr = 1e-08
+I0111 12:33:01.890151  4932 solver.cpp:240] Iteration 71940, loss = 0.0525818
+I0111 12:33:01.890259  4932 solver.cpp:255]     Train net output #0: loss = 0.00458874 (* 1 = 0.00458874 loss)
+I0111 12:33:01.890272  4932 solver.cpp:631] Iteration 71940, lr = 1e-08
+I0111 12:33:11.106261  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.1033 > 20) by scale factor 0.947718
+I0111 12:33:46.263149  4932 solver.cpp:240] Iteration 71960, loss = 0.0871387
+I0111 12:33:46.263231  4932 solver.cpp:255]     Train net output #0: loss = 0.116858 (* 1 = 0.116858 loss)
+I0111 12:33:46.263242  4932 solver.cpp:631] Iteration 71960, lr = 1e-08
+I0111 12:33:48.821627  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.711 > 20) by scale factor 0.921194
+I0111 12:34:30.637890  4932 solver.cpp:240] Iteration 71980, loss = 0.0738517
+I0111 12:34:30.637964  4932 solver.cpp:255]     Train net output #0: loss = 0.0639367 (* 1 = 0.0639367 loss)
+I0111 12:34:30.637974  4932 solver.cpp:631] Iteration 71980, lr = 1e-08
+I0111 12:34:48.721029  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.792 > 20) by scale factor 0.806712
+I0111 12:34:57.599531  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.5876 > 20) by scale factor 0.885443
+I0111 12:35:13.140749  4932 solver.cpp:424] Iteration 72000, Testing net (#0)
+I0111 12:36:02.905267  4932 solver.cpp:481]     Test net output #0: accuracy = 0.818947
+I0111 12:36:02.905375  4932 solver.cpp:481]     Test net output #1: loss = 0.932766 (* 1 = 0.932766 loss)
+I0111 12:36:04.771477  4932 solver.cpp:240] Iteration 72000, loss = 0.105861
+I0111 12:36:04.771507  4932 solver.cpp:255]     Train net output #0: loss = 0.00518894 (* 1 = 0.00518894 loss)
+I0111 12:36:04.771515  4932 solver.cpp:631] Iteration 72000, lr = 1e-08
+I0111 12:36:49.138830  4932 solver.cpp:240] Iteration 72020, loss = 0.0764438
+I0111 12:36:49.138918  4932 solver.cpp:255]     Train net output #0: loss = 0.0130228 (* 1 = 0.0130228 loss)
+I0111 12:36:49.138931  4932 solver.cpp:631] Iteration 72020, lr = 1e-08
+I0111 12:37:00.569902  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.9425 > 20) by scale factor 0.835336
+I0111 12:37:33.516460  4932 solver.cpp:240] Iteration 72040, loss = 0.0943766
+I0111 12:37:33.516552  4932 solver.cpp:255]     Train net output #0: loss = 0.0481505 (* 1 = 0.0481505 loss)
+I0111 12:37:33.516566  4932 solver.cpp:631] Iteration 72040, lr = 1e-08
+I0111 12:37:36.078186  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.0913 > 20) by scale factor 0.995456
+I0111 12:37:44.959137  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.7876 > 20) by scale factor 0.877669
+I0111 12:37:56.057473  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.072 > 20) by scale factor 0.866852
+I0111 12:38:09.372309  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.3869 > 20) by scale factor 0.981021
+I0111 12:38:17.908694  4932 solver.cpp:240] Iteration 72060, loss = 0.134737
+I0111 12:38:17.908735  4932 solver.cpp:255]     Train net output #0: loss = 0.0310012 (* 1 = 0.0310012 loss)
+I0111 12:38:17.908855  4932 solver.cpp:631] Iteration 72060, lr = 1e-08
+I0111 12:38:29.347196  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 30.0925 > 20) by scale factor 0.664617
+I0111 12:38:49.325125  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.4621 > 20) by scale factor 0.852437
+I0111 12:38:51.549377  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.9605 > 20) by scale factor 0.7704
+I0111 12:39:02.307528  4932 solver.cpp:240] Iteration 72080, loss = 0.0764867
+I0111 12:39:02.307574  4932 solver.cpp:255]     Train net output #0: loss = 0.00125468 (* 1 = 0.00125468 loss)
+I0111 12:39:02.307706  4932 solver.cpp:631] Iteration 72080, lr = 1e-08
+I0111 12:39:13.744102  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 29.1732 > 20) by scale factor 0.685562
+I0111 12:39:29.284786  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.4704 > 20) by scale factor 0.931514
+I0111 12:39:46.699877  4932 solver.cpp:240] Iteration 72100, loss = 0.101548
+I0111 12:39:46.699916  4932 solver.cpp:255]     Train net output #0: loss = 0.172978 (* 1 = 0.172978 loss)
+I0111 12:39:46.699925  4932 solver.cpp:631] Iteration 72100, lr = 1e-08
+I0111 12:40:02.570011  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.5066 > 20) by scale factor 0.975298
+I0111 12:40:04.792086  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.1166 > 20) by scale factor 0.947124
+I0111 12:40:31.080001  4932 solver.cpp:240] Iteration 72120, loss = 0.0609077
+I0111 12:40:31.080049  4932 solver.cpp:255]     Train net output #0: loss = 0.0468079 (* 1 = 0.0468079 loss)
+I0111 12:40:31.080060  4932 solver.cpp:631] Iteration 72120, lr = 1e-08
+I0111 12:41:15.453434  4932 solver.cpp:240] Iteration 72140, loss = 0.0567516
+I0111 12:41:15.453526  4932 solver.cpp:255]     Train net output #0: loss = 0.0024274 (* 1 = 0.0024274 loss)
+I0111 12:41:15.453537  4932 solver.cpp:631] Iteration 72140, lr = 1e-08
+I0111 12:41:59.835585  4932 solver.cpp:240] Iteration 72160, loss = 0.0503197
+I0111 12:41:59.835693  4932 solver.cpp:255]     Train net output #0: loss = 0.049637 (* 1 = 0.049637 loss)
+I0111 12:41:59.835711  4932 solver.cpp:631] Iteration 72160, lr = 1e-08
+I0111 12:42:11.271443  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 28.8623 > 20) by scale factor 0.692946
+I0111 12:42:44.215349  4932 solver.cpp:240] Iteration 72180, loss = 0.0352413
+I0111 12:42:44.215431  4932 solver.cpp:255]     Train net output #0: loss = 0.00761136 (* 1 = 0.00761136 loss)
+I0111 12:42:44.215443  4932 solver.cpp:631] Iteration 72180, lr = 1e-08
+I0111 12:43:04.524628  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.7712 > 20) by scale factor 0.878301
+I0111 12:43:08.962693  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.2005 > 20) by scale factor 0.763344
+I0111 12:43:28.593569  4932 solver.cpp:240] Iteration 72200, loss = 0.0646853
+I0111 12:43:28.593670  4932 solver.cpp:255]     Train net output #0: loss = 0.105606 (* 1 = 0.105606 loss)
+I0111 12:43:28.593685  4932 solver.cpp:631] Iteration 72200, lr = 1e-08
+I0111 12:43:33.374610  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.7703 > 20) by scale factor 0.962912
+I0111 12:44:02.219023  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.9248 > 20) by scale factor 0.912208
+I0111 12:44:12.975448  4932 solver.cpp:240] Iteration 72220, loss = 0.0445547
+I0111 12:44:12.975492  4932 solver.cpp:255]     Train net output #0: loss = 0.217592 (* 1 = 0.217592 loss)
+I0111 12:44:12.975507  4932 solver.cpp:631] Iteration 72220, lr = 1e-08
+I0111 12:44:13.314854  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.5562 > 20) by scale factor 0.814457
+I0111 12:44:57.363523  4932 solver.cpp:240] Iteration 72240, loss = 0.0733343
+I0111 12:44:57.363616  4932 solver.cpp:255]     Train net output #0: loss = 0.199241 (* 1 = 0.199241 loss)
+I0111 12:44:57.363628  4932 solver.cpp:631] Iteration 72240, lr = 1e-08
+I0111 12:45:13.238519  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.4082 > 20) by scale factor 0.892529
+I0111 12:45:26.552842  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.5878 > 20) by scale factor 0.847895
+I0111 12:45:37.653481  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.2118 > 20) by scale factor 0.989519
+I0111 12:45:41.754747  4932 solver.cpp:240] Iteration 72260, loss = 0.0753706
+I0111 12:45:41.754787  4932 solver.cpp:255]     Train net output #0: loss = 0.155421 (* 1 = 0.155421 loss)
+I0111 12:45:41.754797  4932 solver.cpp:631] Iteration 72260, lr = 1e-08
+I0111 12:46:08.725366  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.9969 > 20) by scale factor 0.869682
+I0111 12:46:26.136584  4932 solver.cpp:240] Iteration 72280, loss = 0.0539794
+I0111 12:46:26.136625  4932 solver.cpp:255]     Train net output #0: loss = 0.096465 (* 1 = 0.096465 loss)
+I0111 12:46:26.136641  4932 solver.cpp:631] Iteration 72280, lr = 1e-08
+I0111 12:46:37.568215  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.9812 > 20) by scale factor 0.953233
+I0111 12:47:10.512996  4932 solver.cpp:240] Iteration 72300, loss = 0.0776914
+I0111 12:47:10.513072  4932 solver.cpp:255]     Train net output #0: loss = 0.128407 (* 1 = 0.128407 loss)
+I0111 12:47:10.513082  4932 solver.cpp:631] Iteration 72300, lr = 1e-08
+I0111 12:47:21.946909  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 27.3912 > 20) by scale factor 0.730161
+I0111 12:47:33.044066  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.2765 > 20) by scale factor 0.791248
+I0111 12:47:48.579361  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.5403 > 20) by scale factor 0.973697
+I0111 12:47:54.896337  4932 solver.cpp:240] Iteration 72320, loss = 0.0886702
+I0111 12:47:54.896384  4932 solver.cpp:255]     Train net output #0: loss = 0.0289204 (* 1 = 0.0289204 loss)
+I0111 12:47:54.896395  4932 solver.cpp:631] Iteration 72320, lr = 1e-08
+I0111 12:48:01.892035  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.4735 > 20) by scale factor 0.976872
+I0111 12:48:21.863131  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 35.9697 > 20) by scale factor 0.556023
+I0111 12:48:28.526520  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.186 > 20) by scale factor 0.826924
+I0111 12:48:39.284454  4932 solver.cpp:240] Iteration 72340, loss = 0.0706443
+I0111 12:48:39.284493  4932 solver.cpp:255]     Train net output #0: loss = 0.0789328 (* 1 = 0.0789328 loss)
+I0111 12:48:39.284502  4932 solver.cpp:631] Iteration 72340, lr = 1e-08
+I0111 12:49:19.559877  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.945 > 20) by scale factor 0.742253
+I0111 12:49:23.660204  4932 solver.cpp:240] Iteration 72360, loss = 0.0587715
+I0111 12:49:23.660246  4932 solver.cpp:255]     Train net output #0: loss = 0.029903 (* 1 = 0.029903 loss)
+I0111 12:49:23.660255  4932 solver.cpp:631] Iteration 72360, lr = 1e-08
+I0111 12:50:06.162739  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.0319 > 20) by scale factor 0.832228
+I0111 12:50:08.045059  4932 solver.cpp:240] Iteration 72380, loss = 0.048336
+I0111 12:50:08.045104  4932 solver.cpp:255]     Train net output #0: loss = 0.0183162 (* 1 = 0.0183162 loss)
+I0111 12:50:08.045114  4932 solver.cpp:631] Iteration 72380, lr = 1e-08
+I0111 12:50:15.039198  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.407 > 20) by scale factor 0.980057
+I0111 12:50:28.354701  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.1551 > 20) by scale factor 0.902728
+I0111 12:50:52.417637  4932 solver.cpp:240] Iteration 72400, loss = 0.0670631
+I0111 12:50:52.417706  4932 solver.cpp:255]     Train net output #0: loss = 0.0034315 (* 1 = 0.0034315 loss)
+I0111 12:50:52.417716  4932 solver.cpp:631] Iteration 72400, lr = 1e-08
+I0111 12:50:59.412371  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.5189 > 20) by scale factor 0.815697
+I0111 12:51:12.731693  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.5487 > 20) by scale factor 0.886969
+I0111 12:51:28.261651  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.1453 > 20) by scale factor 0.945836
+I0111 12:51:36.798985  4932 solver.cpp:240] Iteration 72420, loss = 0.0789955
+I0111 12:51:36.799017  4932 solver.cpp:255]     Train net output #0: loss = 0.048938 (* 1 = 0.048938 loss)
+I0111 12:51:36.799026  4932 solver.cpp:631] Iteration 72420, lr = 1e-08
+I0111 12:51:50.451597  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 36.4675 > 20) by scale factor 0.548433
+I0111 12:52:21.175942  4932 solver.cpp:240] Iteration 72440, loss = 0.0844463
+I0111 12:52:21.176038  4932 solver.cpp:255]     Train net output #0: loss = 0.0442807 (* 1 = 0.0442807 loss)
+I0111 12:52:21.176053  4932 solver.cpp:631] Iteration 72440, lr = 1e-08
+I0111 12:52:39.262904  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 24.061 > 20) by scale factor 0.831221
+I0111 12:53:05.554718  4932 solver.cpp:240] Iteration 72460, loss = 0.0566476
+I0111 12:53:05.554816  4932 solver.cpp:255]     Train net output #0: loss = 0.00352723 (* 1 = 0.00352723 loss)
+I0111 12:53:05.554831  4932 solver.cpp:631] Iteration 72460, lr = 1e-08
+I0111 12:53:46.609555  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 25.6121 > 20) by scale factor 0.78088
+I0111 12:53:55.144907  4932 solver.cpp:240] Iteration 72480, loss = 0.075006
+I0111 12:53:55.144948  4932 solver.cpp:255]     Train net output #0: loss = 0.00521105 (* 1 = 0.00521105 loss)
+I0111 12:53:55.144958  4932 solver.cpp:631] Iteration 72480, lr = 1e-08
+I0111 12:54:26.539369  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 28.0409 > 20) by scale factor 0.713243
+I0111 12:54:28.760128  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.6763 > 20) by scale factor 0.88198
+I0111 12:54:39.516486  4932 solver.cpp:240] Iteration 72500, loss = 0.0729785
+I0111 12:54:39.516531  4932 solver.cpp:255]     Train net output #0: loss = 0.0232751 (* 1 = 0.0232751 loss)
+I0111 12:54:39.516542  4932 solver.cpp:631] Iteration 72500, lr = 1e-08
+I0111 12:54:48.732532  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.6458 > 20) by scale factor 0.883167
+I0111 12:55:23.899067  4932 solver.cpp:240] Iteration 72520, loss = 0.0751432
+I0111 12:55:23.899157  4932 solver.cpp:255]     Train net output #0: loss = 0.180215 (* 1 = 0.180215 loss)
+I0111 12:55:23.899169  4932 solver.cpp:631] Iteration 72520, lr = 1e-08
+I0111 12:55:57.520221  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.2976 > 20) by scale factor 0.896959
+I0111 12:56:08.281831  4932 solver.cpp:240] Iteration 72540, loss = 0.0753646
+I0111 12:56:08.281870  4932 solver.cpp:255]     Train net output #0: loss = 0.00480089 (* 1 = 0.00480089 loss)
+I0111 12:56:08.281886  4932 solver.cpp:631] Iteration 72540, lr = 1e-08
+I0111 12:56:17.498126  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.6991 > 20) by scale factor 0.966227
+I0111 12:56:30.817980  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 26.5772 > 20) by scale factor 0.752525
+I0111 12:56:33.041142  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 22.0469 > 20) by scale factor 0.907155
+I0111 12:56:50.795847  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 20.7856 > 20) by scale factor 0.962205
+I0111 12:56:52.677606  4932 solver.cpp:240] Iteration 72560, loss = 0.0923319
+I0111 12:56:52.677645  4932 solver.cpp:255]     Train net output #0: loss = 0.0243808 (* 1 = 0.0243808 loss)
+I0111 12:56:52.677655  4932 solver.cpp:631] Iteration 72560, lr = 1e-08
+I0111 12:57:37.043869  4932 solver.cpp:240] Iteration 72580, loss = 0.0501386
+I0111 12:57:37.043962  4932 solver.cpp:255]     Train net output #0: loss = 0.0657047 (* 1 = 0.0657047 loss)
+I0111 12:57:37.043977  4932 solver.cpp:631] Iteration 72580, lr = 1e-08
+I0111 12:58:21.437373  4932 solver.cpp:240] Iteration 72600, loss = 0.0771972
+I0111 12:58:21.437448  4932 solver.cpp:255]     Train net output #0: loss = 0.000683173 (* 1 = 0.000683173 loss)
+I0111 12:58:21.437459  4932 solver.cpp:631] Iteration 72600, lr = 1e-08
+I0111 12:58:52.843011  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.7512 > 20) by scale factor 0.842063
+I0111 12:59:05.846873  4932 solver.cpp:240] Iteration 72620, loss = 0.0520337
+I0111 12:59:05.846915  4932 solver.cpp:255]     Train net output #0: loss = 0.0120918 (* 1 = 0.0120918 loss)
+I0111 12:59:05.846925  4932 solver.cpp:631] Iteration 72620, lr = 1e-08
+I0111 12:59:08.404947  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 21.0696 > 20) by scale factor 0.949236
+I0111 12:59:28.377243  4932 solver.cpp:616] Gradient clipping: scaling down gradients (L2 norm 23.0639 > 20) by scale factor 0.867155
+I0111 12:59:50.231050  4932 solver.cpp:240] Iteration 72640, loss = 0.0508654
+I0111 12:59:50.231089  4932 solver.cpp:255]     Train net output #0: loss = 0.0106006 (* 1 = 0.0106006 loss)
+I0111 12:59:50.231098  4932 solver.cpp:631] Iteration 72640, lr = 1e-08
+I0111 13:00:34.608602  4932 solver.cpp:240] Iteration 72660, loss = 0.0667296
+I0111 13:00:34.608700  4932 solver.cpp:255]     Train net output #0: loss = 0.0909736 (* 1 = 0.0909736 loss)
+I0111 13:00:34.608711  4932 solver.cpp:631] Iteration 72660, lr = 1e-08
