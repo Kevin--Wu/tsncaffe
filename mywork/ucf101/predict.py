@@ -18,15 +18,12 @@ def rgb_predict():
 
 	actdirs=os.listdir(data_root)
 	actid=0
-	print actdirs
 	for curact in actdirs:
-		print curact
-		print data_root+'/'+curact
-		if os.path.isdir(curact):
-			videodirs=os.listdir(data_root+'/'+curact)
+		if os.path.isdir(data_root+curact):
+			videodirs=os.listdir()
 			for curvideo in videodirs:
-				if os.path.isdir(curvideo):
-					framelist=os.listdir(data_root+'/'+curact+'/'+curvideo)
+				if os.path.isdir(data_root+curact+'/'+curvideo):
+					framelist=os.listdir(data_root+curact+'/'+curvideo)
 					print framelist
 
 	image1=caffe.io.load_image(data_root + 'PlayingViolin/v_PlayingViolin_g01_c01/frame000001.jpg')
