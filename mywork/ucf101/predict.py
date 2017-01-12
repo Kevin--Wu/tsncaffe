@@ -9,7 +9,9 @@ import random
 
 def rgb_predict():
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf_videoframedata_jpeg/'
-	net = caffe.Net(caffe_root + 'mywork/ucf101/tsn_bn_inception_rgb_deploy.prototxt',model_root +'2017-1-7/ucf_rgb_bn_inception_iter_80000.caffemodel',caffe.TEST)
+	net = caffe.Net(caffe_root + 'mywork/ucf101/tsn_bn_inception_rgb_deploy.prototxt',model_root +'bn-ucf1-rgb-withpre/ucf_rgb_bn_inception_iter_80000.caffemodel',caffe.TEST)
+	rgbpre=open(caffe_root+'mywork/ucf101/rgbpredict.txt','w')
+
 
 	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
 	transformer.set_transpose('data', (2,0,1))
@@ -45,11 +47,13 @@ def rgb_predict():
 					out = net.blobs['pool_fc'].data[...]
 					out = out[0][0][0]
 					prob=out.argmax()
+					rgbpre.write('%d\n' % prob)
 					if prob == actid:
 						acnum+=1
 					totalnum+=1
 		actid+=1
-	
+	rgbpre.write('%d %d\n' % (acnum,totalnum))
+	rgbpre.close()
 	return acnum,totalnum	
 
 print rgb_predict()
