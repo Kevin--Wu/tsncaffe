@@ -46,8 +46,9 @@ def rgb_predict():
 
 					out = net.blobs['pool_fc'].data[...]
 					out = out[0][0][0]
+					rgbpre.write(out)
+
 					prob=out.argmax()
-					rgbpre.write('%d\n' % prob)
 					if prob == actid:
 						acnum+=1
 					totalnum+=1
