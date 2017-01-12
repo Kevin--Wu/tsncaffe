@@ -19,6 +19,8 @@ def rgb_predict():
 
 	actdirs=os.listdir(data_root)
 	actid=0
+	acnum=0
+	totalnum=0
 	for curact in actdirs:
 		if os.path.isdir(data_root+curact):
 			videodirs=os.listdir(data_root+curact)
@@ -28,22 +30,26 @@ def rgb_predict():
 					framelist.sort()
 					framenum = len(framelist)
 					frameid = random.randint(1,framenum/3)
-					image1path=data_root+curact+'/'+curvideo+'/'+('frame%06d.jpg'.format(frameid))
-					image2path=data_root+curact+'/'+curvideo+'/'+('frame%06d.jpg'.format(frameid+framenum/3))
-					print image2path
+					image1path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
+					image2path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+framenum/3))
+					image3path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*framenum/3))
 
-	image1=caffe.io.load_image(data_root + 'PlayingViolin/v_PlayingViolin_g01_c01/frame000001.jpg')
-	image2=caffe.io.load_image(data_root + 'PlayingViolin/v_PlayingViolin_g01_c01/frame000010.jpg')
-	image3=caffe.io.load_image(data_root + 'PlayingViolin/v_PlayingViolin_g01_c01/frame000020.jpg')
+					image1=caffe.io.load_image(image1path)
+					image2=caffe.io.load_image(image2path)
+					image3=caffe.io.load_image(image3path)
 
-	net.blobs['data'].reshape(3,3,224,224)
-	net.blobs['data'].data[...] = [transformer.preprocess('data', image1),transformer.preprocess('data', image2),transformer.preprocess('data', image3)]
-	net.forward()
+					net.blobs['data'].reshape(3,3,224,224)
+					net.blobs['data'].data[...] = [transformer.preprocess('data', image1),transformer.preprocess('data', image2),transformer.preprocess('data', image3)]
+					net.forward()
 
-	out = net.blobs['pool_fc'].data[...]
-	out = out[0][0][0]
-	out.argmax()+1
+					out = net.blobs['pool_fc'].data[...]
+					out = out[0][0][0]
+					prob=out.argmax()+1
+					if prob == actid:
+						acnum+=1
+					totalnum+=1
+		actid+=1
 	
-	return out	
+	return acnum,totalnum	
 
-rgb_predict()
+print rgb_predict()
