@@ -11,6 +11,7 @@ def rgb_predict():
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf_videoframedata_jpeg/'
 	net = caffe.Net(caffe_root + 'mywork/ucf101/tsn_bn_inception_rgb_deploy.prototxt',model_root +'bn-ucf1-rgb-withpre/ucf_rgb_bn_inception_iter_80000.caffemodel',caffe.TEST)
 	rgbpre=open(caffe_root+'mywork/ucf101/rgbpredict.txt','w')
+	rgblabel=open(caffe_root+'mywork/ucf101/rgblabel.txt','w')
 
 
 	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
@@ -20,12 +21,14 @@ def rgb_predict():
 	transformer.set_channel_swap('data', (2,1,0))  
 
 	actdirs=os.listdir(data_root)
+	actdirs.sort()
 	actid=0
 	acnum=0
 	totalnum=0
 	for curact in actdirs:
 		if os.path.isdir(data_root+curact):
 			videodirs=os.listdir(data_root+curact)
+			videodirs.sort()
 			for curvideo in videodirs:
 				if os.path.isdir(data_root+curact+'/'+curvideo):
 					framelist=os.listdir(data_root+curact+'/'+curvideo)
@@ -49,12 +52,14 @@ def rgb_predict():
 					print >> rgbpre, out
 
 					prob=out.argmax()
+					#rgblabel.write('%d %d\n' % (prob,actid))
 					if prob == actid:
 						acnum+=1
 					totalnum+=1
 		actid+=1
-	rgbpre.write('%d %d\n' % (acnum,totalnum))
+#	rgbpre.write('%d %d\n' % (acnum,totalnum))
 	rgbpre.close()
+	rgblabel.close()
 	return acnum,totalnum	
 
 print rgb_predict()
