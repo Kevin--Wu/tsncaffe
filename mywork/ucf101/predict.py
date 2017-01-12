@@ -9,7 +9,7 @@ import random
 
 def rgb_predict():
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf_videoframedata_jpeg/'
-	net = caffe.Net(caffe_root + 'mywork/ucf101/tsn_bn_inception_rgb_deploy.prototxt',model_root +'bn-ucf1-rgb-withpre/ucf_rgb_bn_inception_iter_80000.caffemodel',caffe.TEST)
+	net = caffe.Net(caffe_root + 'mywork/ucf101/tsn_bn_inception_rgb_deploy.prototxt',model_root +'model/tsp-bn-ucf1-rgb/ucf_rgb_bn_inception_iter_80000.caffemodel',caffe.TEST)
 	rgbpre=open(caffe_root+'mywork/ucf101/rgbpredict.txt','w')
 	rgblabel=open(caffe_root+'mywork/ucf101/rgblabel.txt','w')
 
@@ -52,7 +52,7 @@ def rgb_predict():
 					print >> rgbpre, out
 
 					prob=out.argmax()
-					#rgblabel.write('%d %d\n' % (prob,actid))
+					rgblabel.write('%d %d\n' % (prob,actid))
 					if prob == actid:
 						acnum+=1
 					totalnum+=1
