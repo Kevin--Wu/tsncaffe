@@ -86,7 +86,7 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 				if os.path.isdir(data_root+curact+'/'+curvideo):
 					framelist=os.listdir(data_root+curact+'/'+curvideo)
 					framelist.sort()
-					framenum = len(framelist)
+					framenum = len(framelist)/2
 					i=1
 					count=0
 					segnum=3
@@ -96,26 +96,30 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 					
 					while i<stopid:
 						curseg=0
-						inputdata=[]
+						inputdata=np.zeros((3,10,224,224))
 						while curseg<segnum:
 							frameid = i + curseg*(framenum/3)
 							j=0
 							imagexpath=data_root+curact+'/'+curvideo+'/'+('flow_x_{:0>4d}.jpg'.format(frameid+j))
 							imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
-							imagex=caffe.io.load_image(imagexpath)
-							imagey=caffe.io.load_image(imageypath)
+							imagex=caffe.io.load_image(imagexpath,False)
+							imagey=caffe.io.load_image(imageypath,False)
+							imagex-=128
+							imagey-=128
 							imagesg=np.concatenate((transformer.preprocess('data',imagex),transformer.preprocess('data',imagey)),axis=0)
 							j+=1
 							while j<flow_length:
 								imagexpath=data_root+curact+'/'+curvideo+'/'+('flow_x_{:0>4d}.jpg'.format(frameid+j))
 								imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
-								imagex=caffe.io.load_image(imagexpath)
-								imagey=caffe.io.load_image(imageypath)
+								imagex=caffe.io.load_image(imagexpath,False)
+								imagey=caffe.io.load_image(imageypath,False)
+								imagex-=128
+								imagey-=128
 								imagesg=np.concatenate((imagesg,np.concatenate((transformer.preprocess('data',imagex),transformer.preprocess('data',imagey)),axis=0)),axis=0)
 								j+=1
 
-							inputdata.append(imagesg)
-							print inputdata.shape
+							inputdata[curseg]=imagesg
+							curseg+=1
 
 						net.blobs['data'].reshape(3,10,224,224)
 						net.blobs['data'].data[...] = inputdata
@@ -125,12 +129,11 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						i+=2
 						count+=1
 						totalout=totalout+(out[0][0][0]-totalout)/count
-						print totalout
 
 					
 					
 					print >> flowpre, totalout
-					prob=out.argmax()
+					prob=totalout.argmax()
 					flowlabel.write('%d %d\n' % (prob,actid))
 					if prob == actid:
 						acnum+=1
