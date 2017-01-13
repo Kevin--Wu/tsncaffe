@@ -2,7 +2,7 @@ name: "BN-Inception"
 
 ####################################### data #######################################
 input: "data"
-input_dim: 1
+input_dim: 3
 input_dim: 10
 input_dim: 224
 input_dim: 224
@@ -742,8 +742,12 @@ layer { name: "dropout" top: "global_pool" bottom: "global_pool" type: "Dropout"
   dropout_param { dropout_ratio: 0.8 } }
 
 ####################################### loss accuracy #######################################
-layer { name: "fc-action" type: "InnerProduct" bottom: "global_pool" top: "fc-action"
+layer { name: "fc-action" type: "InnerProduct" bottom: "global_pool" top: "fc"
   param { lr_mult: 1 decay_mult: 1 } param { lr_mult: 2 decay_mult: 0 }
   inner_product_param { num_output: 101
     weight_filler { type: "gaussian" std: 0.001 }
     bias_filler { type: "constant" value: 0 } } }
+layer { name: "reshape_fc" bottom: "fc" top: "reshape_fc" type: "Reshape"
+  reshape_param { shape { dim: [-1, 1, 3, 101 ] } }}
+layer { name: "pool_fusion" bottom: "reshape_fc" top: "pool_fc" type: "Pooling"
+  pooling_param { pool: AVE kernel_h: 3 kernel_w: 1} }
