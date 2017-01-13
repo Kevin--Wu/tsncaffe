@@ -62,7 +62,7 @@ def rgb_predict():
 	rgblabel.close()
 	return acnum,totalnum
 
-def flow_predict() #光流输入的格式是xyxyxy...
+def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf101_flow_img_tvl1_gpu/'
 	net = caffe.Net(caffe_root + 'mywork/ucf101/tsn_bn_inception_flow_deploy.prototxt',model_root +'model/tsp-bn-ucf1-flow-withpre/ucf101_split1_tsn_flow_bn_inception_iter_80000.caffemodel',caffe.TEST)
 	flowpre=open(caffe_root+'mywork/ucf101/flowpredict.txt','w')
@@ -91,7 +91,7 @@ def flow_predict() #光流输入的格式是xyxyxy...
 					count=0
 					segnum=3
 					flow_length=5
-					stopid=(framenum/3)-flowlength*2+1
+					stopid=(framenum/3)-flow_length*2+1
 					totalout=[0]*101
 					
 					while i<stopid:
@@ -104,14 +104,14 @@ def flow_predict() #光流输入的格式是xyxyxy...
 							imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
 							imagex=caffe.io.load_image(imagexpath)
 							imagey=caffe.io.load_image(imageypath)
-							imagesg=concatenate((transformer.preprocess('data',imagex),transformer.preprocess('data',imagey)),axis=0)
+							imagesg=np.concatenate((transformer.preprocess('data',imagex),transformer.preprocess('data',imagey)),axis=0)
 							j+=1
 							while j<flow_length:
 								imagexpath=data_root+curact+'/'+curvideo+'/'+('flow_x_{:0>4d}.jpg'.format(frameid+j))
 								imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
 								imagex=caffe.io.load_image(imagexpath)
 								imagey=caffe.io.load_image(imageypath)
-								imagesg=concatenate((imagesg,concatenate((transformer.preprocess('data',imagex),transformer.preprocess('data',imagey)),axis=0)),axis=0)
+								imagesg=np.concatenate((imagesg,np.concatenate((transformer.preprocess('data',imagex),transformer.preprocess('data',imagey)),axis=0)),axis=0)
 								j+=1
 
 							inputdata.append(imagesg)
