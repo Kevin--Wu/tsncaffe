@@ -115,6 +115,7 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 								j+=1
 
 							inputdata.append(imagesg)
+							print inputdata.shape
 
 						net.blobs['data'].reshape(3,10,224,224)
 						net.blobs['data'].data[...] = inputdata
@@ -124,6 +125,7 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						i+=2
 						count+=1
 						totalout=totalout+(out[0][0][0]-totalout)/count
+						print totalout
 
 					
 					
