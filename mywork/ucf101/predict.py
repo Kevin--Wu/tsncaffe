@@ -72,6 +72,7 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
 	transformer.set_transpose('data', (2,0,1))
 	transformer.set_raw_scale('data', 255)  
+	mean_value=128
 
 	actdirs=os.listdir(data_root)
 	actdirs.sort()
@@ -92,7 +93,7 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 					segnum=3
 					flow_length=5
 					stopid=(framenum/3)-flow_length*2+1
-					totalout=[0]*101
+					totalout=np.zeros((101))
 					
 					while i<stopid:
 						curseg=0
@@ -104,18 +105,14 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 							imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
 							imagex=caffe.io.load_image(imagexpath,False)
 							imagey=caffe.io.load_image(imageypath,False)
-							imagex-=128
-							imagey-=128
-							imagesg=np.concatenate((transformer.preprocess('data',imagex),transformer.preprocess('data',imagey)),axis=0)
+							imagesg=np.concatenate((transformer.preprocess('data',imagex)-mean_value,transformer.preprocess('data',imagey)-mean_value),axis=0)
 							j+=1
 							while j<flow_length:
 								imagexpath=data_root+curact+'/'+curvideo+'/'+('flow_x_{:0>4d}.jpg'.format(frameid+j))
 								imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
 								imagex=caffe.io.load_image(imagexpath,False)
 								imagey=caffe.io.load_image(imageypath,False)
-								imagex-=128
-								imagey-=128
-								imagesg=np.concatenate((imagesg,np.concatenate((transformer.preprocess('data',imagex),transformer.preprocess('data',imagey)),axis=0)),axis=0)
+								imagesg=np.concatenate((imagesg,np.concatenate((transformer.preprocess('data',imagex)-mean_value,transformer.preprocess('data',imagey)-mean_value),axis=0)),axis=0)
 								j+=1
 
 							inputdata[curseg]=imagesg
@@ -126,7 +123,7 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-						i+=2
+						i+=8
 						count+=1
 						totalout=totalout+(out[0][0][0]-totalout)/count
 
