@@ -141,4 +141,4 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	flowlabel.close()
 	return acnum,totalnum
 
-print flow_predict()
+print rgb_predict()
