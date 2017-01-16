@@ -34,23 +34,31 @@ def rgb_predict():
 					framelist=os.listdir(data_root+curact+'/'+curvideo)
 					framelist.sort()
 					framenum = len(framelist)
-					frameid = random.randint(1,framenum/3)
-					image1path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
-					image2path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+framenum/3))
-					image3path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*framenum/3))
+					segnum=3
+					seglength=framenum/segnum
+					i=0
+					count=0
+					totalout=np.zeros((101))
+					while i<seglength:
+						frameid = i
+						image1path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
+						image2path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+seglength))
+						image3path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*seglength))
 
-					image1=caffe.io.load_image(image1path)
-					image2=caffe.io.load_image(image2path)
-					image3=caffe.io.load_image(image3path)
+						image1=caffe.io.load_image(image1path)
+						image2=caffe.io.load_image(image2path)
+						image3=caffe.io.load_image(image3path)
 
-					net.blobs['data'].reshape(3,3,224,224)
-					net.blobs['data'].data[...] = [transformer.preprocess('data', image1),transformer.preprocess('data', image2),transformer.preprocess('data', image3)]
-					net.forward()
+						net.blobs['data'].reshape(3,3,224,224)
+						net.blobs['data'].data[...] = [transformer.preprocess('data', image1),transformer.preprocess('data', image2),transformer.preprocess('data', image3)]
+						net.forward()
 
-					out = net.blobs['pool_fc'].data[...]
-					out = out[0][0][0]
+						out = net.blobs['pool_fc'].data[...]
+						i+=8
+						count+=1
+						totalout=totalout+(out[0][0][0]-totalout)/count
+					
 					print >> rgbpre, out
-
 					prob=out.argmax()
 					rgblabel.write('%d %d\n' % (prob,actid))
 					if prob == actid:
@@ -141,4 +149,4 @@ def flow_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	flowlabel.close()
 	return acnum,totalnum
 
-print flow_predict()
+print rgb_predict()
