@@ -16,7 +16,6 @@ def rgb_predict():
 
 	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
 	transformer.set_transpose('data', (2,0,1))
-	transformer.set_mean('data', np.load(caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy').mean(1).mean(1))
 	transformer.set_raw_scale('data', 255)  
 	transformer.set_channel_swap('data', (2,1,0))  
 
@@ -25,6 +24,9 @@ def rgb_predict():
 	actid=0
 	acnum=0
 	totalnum=0
+	Bvalue=104
+	Gvalue=117
+	Rvalue=123
 	for curact in actdirs:
 		if os.path.isdir(data_root+curact):
 			videodirs=os.listdir(data_root+curact)
@@ -36,7 +38,7 @@ def rgb_predict():
 					framenum = len(framelist)
 					segnum=3
 					seglength=framenum/segnum
-					i=0
+					i=1
 					count=0
 					totalout=np.zeros((101))
 					while i<seglength:
@@ -45,22 +47,33 @@ def rgb_predict():
 						image2path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+seglength))
 						image3path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*seglength))
 
-						image1=caffe.io.load_image(image1path)
-						image2=caffe.io.load_image(image2path)
-						image3=caffe.io.load_image(image3path)
+						image1=transformer.preprocess('data',caffe.io.load_image(image1path))
+						image2=transformer.preprocess('data',caffe.io.load_image(image2path))
+						image3=transformer.preprocess('data',caffe.io.load_image(image3path))
 
+						image1[0]-=Bvalue
+						image1[1]-=Gvalue
+						image1[2]-=Rvalue
+						image2[0]-=Bvalue
+						image2[1]-=Gvalue
+						image2[2]-=Rvalue
+						image3[0]-=Bvalue
+						image3[1]-=Gvalue
+						image3[2]-=Rvalue
+						
 						net.blobs['data'].reshape(3,3,224,224)
-						net.blobs['data'].data[...] = [transformer.preprocess('data', image1),transformer.preprocess('data', image2),transformer.preprocess('data', image3)]
+						net.blobs['data'].data[...] = [image1,image2,image3]
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-						i+=8
+						i+=32
 						count+=1
 						totalout=totalout+(out[0][0][0]-totalout)/count
 					
 					print >> rgbpre, out
 					prob=out.argmax()
 					rgblabel.write('%d %d\n' % (prob,actid))
+					print (prob,actid)
 					if prob == actid:
 						acnum+=1
 					totalnum+=1
