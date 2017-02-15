@@ -1,7 +1,7 @@
 name: "BN-Inception"
 layer {
   name: "data"
-  type: "VideoData"
+  type: "PiVideoData"
   top: "data"
   top: "label"
   video_data_param {
