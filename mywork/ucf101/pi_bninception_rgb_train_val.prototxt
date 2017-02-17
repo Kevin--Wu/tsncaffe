@@ -31,7 +31,7 @@ layer {
   type: "PiVideoData"
   top: "data"
   top: "label"
-  video_data_param {
+  pi_video_data_param {
     source: "/home/hadoop/whx/dataset/ucf101/val_rgb_split1.txt"
     batch_size: 1
     new_length: 1
