@@ -28,7 +28,7 @@ void PiVideoDataLayer<Dtype>:: DataLayerSetUp(const vector<Blob<Dtype>*>& bottom
 	const int new_height  = this->layer_param_.pi_video_data_param().new_height();
 	const int new_width  = this->layer_param_.pi_video_data_param().new_width();
 	const int new_length  = this->layer_param_.pi_video_data_param().new_length();
-	const int num_segments = this->layer_param_.pi_video_data_param().num_segments();
+	//const int num_segments = this->layer_param_.pi_video_data_param().num_segments();
 	const string& source = this->layer_param_.pi_video_data_param().source();
 
 	LOG(INFO) << "Opening file: " << source;
@@ -53,7 +53,7 @@ void PiVideoDataLayer<Dtype>:: DataLayerSetUp(const vector<Blob<Dtype>*>& bottom
 	//check name patter
 	if (this->layer_param_.pi_video_data_param().name_pattern() == ""){
 		if (this->layer_param_.pi_video_data_param().modality() == PiVideoDataParameter_Modality_RGB){
-			name_pattern_ = "image_%04d.jpg";
+			name_pattern_ = "frame%06d.jpg";
 		}else if (this->layer_param_.pi_video_data_param().modality() == PiVideoDataParameter_Modality_FLOW){
 			name_pattern_ = "flow_%c_%04d.jpg";
 		}
@@ -64,12 +64,16 @@ void PiVideoDataLayer<Dtype>:: DataLayerSetUp(const vector<Blob<Dtype>*>& bottom
 	Datum datum;
 	const unsigned int frame_prefectch_rng_seed = caffe_rng_rand();
 	frame_prefetch_rng_.reset(new Caffe::RNG(frame_prefectch_rng_seed));
-	int average_duration = (int) lines_duration_[lines_id_]/num_segments;
 	vector<int> offsets;
-	for (int i = 0; i < num_segments; ++i){
-		caffe::rng_t* frame_rng = static_cast<caffe::rng_t*>(frame_prefetch_rng_->generator());
-		int offset = (*frame_rng)() % (average_duration - new_length + 1);
-		offsets.push_back(offset+i*average_duration);
+	for (int seg=0;seg<this->layer_param_.pi_video_data_param().num_segments_size();seg++)
+	{
+		const int num_segments = this->layer_param_.pi_video_data_param().num_segments(seg);
+		int average_duration = (int) lines_duration_[lines_id_]/num_segments;
+		for (int i = 0; i < num_segments; ++i){
+			caffe::rng_t* frame_rng = static_cast<caffe::rng_t*>(frame_prefetch_rng_->generator());
+			int offset = (*frame_rng)() % (average_duration - new_length + 1);
+			offsets.push_back(offset+i*average_duration);
+		}
 	}
 	if (this->layer_param_.pi_video_data_param().modality() == PiVideoDataParameter_Modality_FLOW)
 		CHECK(PiReadSegmentFlowToDatum(lines_[lines_id_].first, lines_[lines_id_].second,
@@ -115,29 +119,35 @@ void PiVideoDataLayer<Dtype>::InternalThreadEntry(){
 	const int new_height = pi_video_data_param.new_height();
 	const int new_width = pi_video_data_param.new_width();
 	const int new_length = pi_video_data_param.new_length();
-	const int num_segments = pi_video_data_param.num_segments();
+	//const int num_segments = pi_video_data_param.num_segments();
 	const int lines_size = lines_.size();
 
 	for (int item_id = 0; item_id < batch_size; ++item_id){
 		CHECK_GT(lines_size, lines_id_);
 		vector<int> offsets;
-		int average_duration = (int) lines_duration_[lines_id_] / num_segments;
-		for (int i = 0; i < num_segments; ++i){
-			if (this->phase_==TRAIN){
-				if (average_duration >= new_length){
-					caffe::rng_t* frame_rng = static_cast<caffe::rng_t*>(frame_prefetch_rng_->generator());
-					int offset = (*frame_rng)() % (average_duration - new_length + 1);
-					offsets.push_back(offset+i*average_duration);
-				} else {
+
+		for (int seg=0;seg<this->layer_param_.pi_video_data_param().num_segments_size();seg++)
+		{
+			const int num_segments = pi_video_data_param.num_segments(seg);
+			int average_duration = (int) lines_duration_[lines_id_] / num_segments;
+			for (int i = 0; i < num_segments; ++i){
+				if (this->phase_==TRAIN){
+					if (average_duration >= new_length){
+						caffe::rng_t* frame_rng = static_cast<caffe::rng_t*>(frame_prefetch_rng_->generator());
+						int offset = (*frame_rng)() % (average_duration - new_length + 1);
+						offsets.push_back(offset+i*average_duration);
+					} else {
+						offsets.push_back(1);
+					}
+				} else{
+					if (average_duration >= new_length)
+					offsets.push_back(int((average_duration-new_length+1)/2 + i*average_duration));
+					else
 					offsets.push_back(1);
 				}
-			} else{
-				if (average_duration >= new_length)
-				offsets.push_back(int((average_duration-new_length+1)/2 + i*average_duration));
-				else
-				offsets.push_back(1);
 			}
 		}
+
 		if (this->layer_param_.pi_video_data_param().modality() == PiVideoDataParameter_Modality_FLOW){
 			if(!PiReadSegmentFlowToDatum(lines_[lines_id_].first, lines_[lines_id_].second,
 									   offsets, new_height, new_width, new_length, &datum, name_pattern_.c_str())) {
