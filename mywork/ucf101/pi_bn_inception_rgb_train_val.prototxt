@@ -1,14 +1,14 @@
 name: "BN-Inception"
 layer {
   name: "data"
-  type: "VideoData"
+  type: "PiVideoData"
   top: "data"
   top: "label"
-  video_data_param {
+  pi_video_data_param {
     source: "/home/hadoop/whx/dataset/ucf101/train_rgb_split1.txt"
-    batch_size: 24
+    batch_size: 8
     new_length: 1
-    num_segments: 3
+    num_segments: [3,6]
     modality: RGB
     shuffle: true
     name_pattern: "frame%06d.jpg"
@@ -22,7 +22,7 @@ layer {
     max_distort: 1
     scale_ratios:[1,.875,.75, .66]
     is_flow: false
-    mean_value: [104, 117, 123, 104, 117, 123, 104, 117, 123]
+    mean_value: [104, 117, 123, 104, 117, 123, 104, 117, 123,104, 117, 123, 104, 117, 123, 104, 117, 123,104, 117, 123, 104, 117, 123, 104, 117, 123]
   }
   include: { phase: TRAIN }
 }
@@ -31,18 +31,18 @@ layer {
   type: "VideoData"
   top: "data"
   top: "label"
-  video_data_param {
+  pi_video_data_param {
     source: "/home/hadoop/whx/dataset/ucf101/val_rgb_split1.txt"
     batch_size: 1
     new_length: 1
-    num_segments: 3
+    num_segments: [3,6]
     modality: RGB
     name_pattern: "frame%06d.jpg"
   }
   transform_param{
     crop_size: 224
     mirror: false
-    mean_value: [104, 117, 123, 104, 117, 123, 104, 117, 123]
+    mean_value: [104, 117, 123, 104, 117, 123, 104, 117, 123,104, 117, 123, 104, 117, 123, 104, 117, 123,104, 117, 123, 104, 117, 123, 104, 117, 123]
   }
   include: { phase: TEST }
 }
