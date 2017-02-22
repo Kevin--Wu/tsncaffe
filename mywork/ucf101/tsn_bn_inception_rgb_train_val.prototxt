@@ -4,7 +4,7 @@ layer {
   type: "VideoData"
   top: "data"
   top: "label"
-  pi_video_data_param {
+  video_data_param {
     source: "/home/hadoop/whx/dataset/ucf101/train_rgb_split1.txt"
     batch_size: 24
     new_length: 1

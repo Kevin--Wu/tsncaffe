@@ -1,4 +1,4 @@
-net: "/home/hadoop/whx/tsncaffe/mywork/ucf101/tsn_bn_inception_rgb_train_val.prototxt"
+net: "mywork/ucf101/tsn_bn_inception_rgb_train_val.prototxt"
 
 # testing parameter
 test_iter:950
@@ -9,15 +9,15 @@ test_initialization: true
 display: 20
 average_loss: 20
 #snapshot: 500
-snapshot_prefix: "/home/hadoop/whx/tsncaffe/mywork/ucf101/snapshot/ucf_rgb_bn_inception"
+snapshot_prefix: "mywork/ucf101/snapshot"
 debug_info: false
 
 # learning rate
-base_lr: 0.0001
+base_lr: 0.0005
 lr_policy: "step"
 gamma: 0.1
-stepsize: 20000
-max_iter: 80000
+stepsize: 1500
+max_iter: 3500
 iter_size: 1
 
 # parameter of SGD

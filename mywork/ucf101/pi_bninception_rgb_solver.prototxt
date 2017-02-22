@@ -8,7 +8,7 @@ test_initialization: true
 # output
 display: 20
 average_loss: 20
-#snapshot: 500
+snapshot: 500
 snapshot_prefix: "/home/hadoop/whx/tsncaffe/mywork/ucf101/snapshot/ucf_rgb_pi"
 debug_info: false
 
