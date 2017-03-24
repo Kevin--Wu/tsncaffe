@@ -9,15 +9,15 @@ test_initialization: true
 display: 20
 average_loss: 20
 #snapshot: 500
-snapshot_prefix: "mywork/ucf101/snapshot/pi_bn_rgb"
+snapshot_prefix: "mywork/ucf101/snapshot/pi_bn_rgb_withpre"
 debug_info: false
 
 # learning rate
-base_lr: 0.0005
-lr_policy: "step"
+base_lr: 0.00005
+lr_policy: "multistep"
 gamma: 0.1
-stepsize: 10000
-max_iter: 30000
+stepvalue: 50000
+max_iter: 60000
 iter_size: 1
 
 # parameter of SGD

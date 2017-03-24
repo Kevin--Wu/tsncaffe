@@ -28,7 +28,7 @@ layer {
 }
 layer {
   name: "data"
-  type: "VideoData"
+  type: "PiVideoData"
   top: "data"
   top: "label"
   pi_video_data_param {
@@ -787,8 +787,8 @@ layer { name: "fc-action" type: "InnerProduct" bottom: "global_pool" top: "fc"
   inner_product_param { num_output: 101
     weight_filler { type: "gaussian" std: 0.001 }
     bias_filler { type: "constant" value: 0 } }}
-layer { name: "reshape_fc" type: "Reshape" bottom: "fc" top: "reshape_fc" reshape_param { shape { dim: [-1, 1, 3, 101] } } } 
-layer { name: "segment_consensus" type: "Pooling" bottom: "reshape_fc" top: "pool_fusion" pooling_param { pool: AVE kernel_h: 3 kernel_w: 1 } }
+layer { name: "reshape_fc" type: "Reshape" bottom: "fc" top: "reshape_fc" reshape_param { shape { dim: [-1, 1, 9, 101] } } } 
+layer { name: "segment_consensus" type: "Pooling" bottom: "reshape_fc" top: "pool_fusion" pooling_param { pool: AVE kernel_h: 9 kernel_w: 1 } }
 layer { name: "loss" type: "SoftmaxWithLoss" bottom: "pool_fusion" bottom: "label" top: "loss" softmax_param { axis: 3} }
 layer { name: "accuracy_top1" type: "Accuracy" bottom: "pool_fusion" bottom: "label" top: "accuracy" accuracy_param {axis:3}
   include { phase: TEST } }
