@@ -9,7 +9,7 @@ import random
 
 def rgb_video_predict():
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf_videoframedata_jpeg/'
-	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_bn_inception_rgb_deploy.prototxt',model_root +'model/tsp-bn-ucf1-rgb/ucf_rgb_bn_inception_iter_80000.caffemodel',caffe.TEST)
+	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_bn_inception_rgb_deploy.prototxt',model_root +'model/pi-bn-ucf1-rgb/pi_bn_rgb_iter_60000.caffemodel',caffe.TEST)
 	rgbpre=open(caffe_root+'mywork/ucf101/rgbpredict.txt','w')
 	rgblabel=open(caffe_root+'mywork/ucf101/rgblabel.txt','w')
 
