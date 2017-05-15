@@ -27,6 +27,7 @@ def rgb_video_predict():
 	Bvalue=104
 	Gvalue=117
 	Rvalue=123
+	video_count=1
 	for curact in actdirs:
 		if os.path.isdir(data_root+curact):
 			videodirs=os.listdir(data_root+curact)
@@ -37,7 +38,7 @@ def rgb_video_predict():
 					framelist.sort()
 					framenum = len(framelist)
 					segnums=[3,6]
-					seglength=framenum/max(segnums)
+					seglength=framenum//6
 					i=1
 					count=0
 					totalout=np.zeros((101))
@@ -96,17 +97,19 @@ def rgb_video_predict():
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-						i+=16
+						i+=32
 						count+=1
-						totalout=totalout+(out[0][0][0]-totalout)/count
+						#totalout=totalout+(out[0][0][0]-totalout)/count
 					
-					print >> rgbpre, out
-					prob=out.argmax()
-                                        print >> rgblabel, (prob,actid)
-					print (prob,actid)
-					if prob == actid:
-						acnum+=1
-					totalnum+=1
+						print >> rgbpre, out
+						prob=out.argmax()
+	                    print >> rgblabel, (prob,actid)
+						print (prob,actid)
+						if prob == actid:
+							acnum+=1
+						totalnum+=1
+					print("video %d done\n", video_count);
+					video_count+=1
 		actid+=1
 #	rgbpre.write('%d %d\n' % (acnum,totalnum))
 	rgbpre.close()
