@@ -144,14 +144,16 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 					framenum = len(framelist)/2
 					i=1
 					count=0
-					segnum=3
+					segnum=6
 					flow_length=5
-					stopid=(framenum/3)-flow_length*2+1
+					stopid=(framenum/segnum)-flow_length*2+1
 					totalout=np.zeros((101))
 					
 					while i<stopid:
 						curseg=0
-						inputdata=np.zeros((3,10,224,224))
+						inputId=0
+						inputdata=np.zeros((9,10,224,224))
+						isreuse=True
 						while curseg<segnum:
 							frameid = i + curseg*(framenum/3)
 							j=0
@@ -169,10 +171,16 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 								imagesg=np.concatenate((imagesg,np.concatenate((transformer.preprocess('data',imagex)-mean_value,transformer.preprocess('data',imagey)-mean_value),axis=0)),axis=0)
 								j+=1
 
-							inputdata[curseg]=imagesg
-							curseg+=1
+							inputdata[inputId]=imagesg
+							inputId+=1
+							if(curseg%2==0 && isreuse):
+								isreuse=False
+								continue
+							else:
+								isreuse=True
+								curseg+=1
 
-						net.blobs['data'].reshape(3,10,224,224)
+						net.blobs['data'].reshape(9,10,224,224)
 						net.blobs['data'].data[...] = inputdata
 						net.forward()
 
