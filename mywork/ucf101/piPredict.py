@@ -97,18 +97,18 @@ def rgb_video_predict():
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-						i+=32
+						i+=16
 						count+=1
 						#totalout=totalout+(out[0][0][0]-totalout)/count
 					
 						print >> rgbpre, out
 						prob=out.argmax()
-	                    print >> rgblabel, (prob,actid)
+	                                        print >> rgblabel, (prob,actid)
 						print (prob,actid)
 						if prob == actid:
 							acnum+=1
 						totalnum+=1
-					print("video %d done\n", video_count);
+					print('video %d done' % video_count);
 					video_count+=1
 		actid+=1
 #	rgbpre.write('%d %d\n' % (acnum,totalnum))
