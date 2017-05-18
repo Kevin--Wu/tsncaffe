@@ -118,7 +118,7 @@ def rgb_video_predict():
 
 def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf101_flow_img_tvl1_gpu/'
-	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_tsn_bn_inception_flow_deploy.prototxt',model_root +'model/pi-bn-ucf1-flow/pi_ucf101_split1_tsn_flow_bn_inception_iter_80000.caffemodel',caffe.TEST)
+	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_tsn_bn_inception_flow_deploy.prototxt',model_root +'model/pi-bn-ucf1-flow-withpre/pi_ucf101_split1_tsn_flow_bn_inception_iter_80000.caffemodel',caffe.TEST)
 	flowpre=open(caffe_root+'mywork/ucf101/flowpredict.txt','w')
 	flowlabel=open(caffe_root+'mywork/ucf101/flowlabel.txt','w')
 
@@ -133,6 +133,7 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	actid=0
 	acnum=0
 	totalnum=0
+        videonum=1
 	for curact in actdirs:
 		if os.path.isdir(data_root+curact):
 			videodirs=os.listdir(data_root+curact)
@@ -155,7 +156,7 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						inputdata=np.zeros((9,10,224,224))
 						isreuse=True
 						while curseg<segnum:
-							frameid = i + curseg*(framenum/3)
+							frameid = i + curseg*(framenum/segnum)
 							j=0
 							imagexpath=data_root+curact+'/'+curvideo+'/'+('flow_x_{:0>4d}.jpg'.format(frameid+j))
 							imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
@@ -173,7 +174,7 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 
 							inputdata[inputId]=imagesg
 							inputId+=1
-							if(curseg%2==0 && isreuse):
+							if(curseg%2==0 and isreuse):
 								isreuse=False
 								continue
 							else:
@@ -185,18 +186,21 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-						i+=8
+						i+=32
 						count+=1
-						totalout=totalout+(out[0][0][0]-totalout)/count
+						#totalout=totalout+(out[0][0][0]-totalout)/count
 
 					
 					
-					print >> flowpre, totalout
-					prob=totalout.argmax()
-					flowlabel.write('%d %d\n' % (prob,actid))
-					if prob == actid:
-						acnum+=1
-					totalnum+=1
+					        print >> flowpre, out
+					        prob=out.argmax()
+    					        flowlabel.write('%d %d\n' % (prob,actid))
+                                                print prob,actid
+					        if prob == actid:
+						    acnum+=1
+					        totalnum+=1
+                                        print("video %d done" % videonum)
+                                        videonum+=1
 		actid+=1
 #	rgbpre.write('%d %d\n' % (acnum,totalnum))
 	flowpre.close()
