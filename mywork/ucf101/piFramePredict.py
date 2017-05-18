@@ -9,7 +9,7 @@ import random
 
 def rgb_frame_predict():
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf_videoframedata_jpeg/'
-	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_bn_inception_rgb_deploy_frame.prototxt',model_root +'model/pi-bn-ucf1-rgb-withpre/pi_bn_rgb_iter_60000.caffemodel',caffe.TEST)
+	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_bn_inception_rgb_deploy_frame.prototxt',model_root +'model/pi-bn-ucf1-rgb/pi_bn_rgb_iter_60000.caffemodel',caffe.TEST)
 	rgbpre=open(caffe_root+'mywork/ucf101/rgbpredict.txt','w')
 	rgblabel=open(caffe_root+'mywork/ucf101/rgblabel.txt','w')
 
@@ -63,7 +63,7 @@ def rgb_frame_predict():
 						print >> rgbpre, out
 						prob=out.argmax()
 						print >> rgblabel, (prob,actid)
-						print (prob,actid)
+						#print (prob,actid)
 						if prob == actid:
 							acnum+=1
 						totalnum+=1
@@ -94,7 +94,7 @@ def flow_frame_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	actid=0
 	acnum=0
 	totalnum=0
-    videonum=1
+        videonum=1
 	for curact in actdirs:
 		if os.path.isdir(data_root+curact):
 			videodirs=os.listdir(data_root+curact)
@@ -132,16 +132,14 @@ def flow_frame_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-
 					
-					
-					    print >> flowpre, out
-					    prob=out.argmax()
-					    flowlabel.write('%d %d\n' % (prob,actid))
-					    print prob,actid
-					    if prob == actid:
-					    	acnum+=1
-					    totalnum+=1
+					        print >> flowpre, out
+					        prob=out.argmax()
+        					flowlabel.write('%d %d\n' % (prob,actid))
+	        				#print prob,actid
+		        			if prob == actid:
+			        		    acnum+=1
+				        	totalnum+=1
 				print("video %d done" % videonum)
 				videonum+=1
 		actid+=1
