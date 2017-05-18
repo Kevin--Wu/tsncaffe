@@ -748,6 +748,6 @@ layer { name: "fc-action" type: "InnerProduct" bottom: "global_pool" top: "fc"
     weight_filler { type: "gaussian" std: 0.001 }
     bias_filler { type: "constant" value: 0 } } }
 layer { name: "reshape_fc" bottom: "fc" top: "reshape_fc" type: "Reshape"
-  reshape_param { shape { dim: [-1, 1, 9, 101 ] } }}
+  reshape_param { shape { dim: [-1, 1, 1, 101 ] } }}
 layer { name: "pool_fusion" bottom: "reshape_fc" top: "pool_fc" type: "Pooling"
   pooling_param { pool: AVE kernel_h: 1 kernel_w: 1} }
