@@ -9,7 +9,7 @@ import random
 
 def rgb_frame_predict():
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf_videoframedata_jpeg/'
-	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_bn_inception_rgb_deploy_frame.prototxt',model_root +'model/pi-bn-ucf1-rgb/pi_bn_rgb_iter_60000.caffemodel',caffe.TEST)
+	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_bn_inception_rgb_deploy_frame.prototxt',model_root +'model/pi-bn-ucf1-rgb-withpre/pi_bn_rgb_withpre_iter_60000.caffemodel',caffe.TEST)
 	rgbpre=open(caffe_root+'mywork/ucf101/rgbpredict.txt','w')
 	rgblabel=open(caffe_root+'mywork/ucf101/rgblabel.txt','w')
 
@@ -68,7 +68,7 @@ def rgb_frame_predict():
 							acnum+=1
 						totalnum+=1
 
-						frameid+=1
+						frameid+=8
 					print('video %d done' % video_count);
 					video_count+=1
 		actid+=1
@@ -140,6 +140,8 @@ def flow_frame_predict():	#The format of flow imgs is flowx flowy flowx flowy
 		        			if prob == actid:
 			        		    acnum+=1
 				        	totalnum+=1
+                                                
+                                                frameid+=8
 				print("video %d done" % videonum)
 				videonum+=1
 		actid+=1
