@@ -79,7 +79,7 @@ def rgb_frame_predict():
 
 def flow_frame_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf101_flow_img_tvl1_gpu/'
-	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_tsn_bn_inception_flow_deploy_frame.prototxt',model_root +'model/pi-bn-ucf1-flow-withpre/pi_ucf101_split1_tsn_flow_bn_inception_iter_80000.caffemodel',caffe.TEST)
+	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_tsn_bn_inception_flow_deploy_frame.prototxt',model_root +'model/pi-bn-ucf1-flow/pi_ucf101_split1_tsn_flow_bn_inception_iter_80000.caffemodel',caffe.TEST)
 	flowpre=open(caffe_root+'mywork/ucf101/flowpredict.txt','w')
 	flowlabel=open(caffe_root+'mywork/ucf101/flowlabel.txt','w')
 
@@ -150,4 +150,4 @@ def flow_frame_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	flowlabel.close()
 	return acnum,totalnum
 
-print rgb_frame_predict()
+print flow_frame_predict()
