@@ -13,11 +13,12 @@ snapshot_prefix: "mywork/hmdb51/snapshot/pi_bn_rgb_withpre"
 debug_info: false
 
 # learning rate
-base_lr: 0.00005
+base_lr: 0.000001
 lr_policy: "multistep"
 gamma: 0.1
-stepvalue: 50000
-max_iter: 60000
+stepvalue: 60000
+stepvalue: 90000
+max_iter: 100000
 iter_size: 1
 
 # parameter of SGD
