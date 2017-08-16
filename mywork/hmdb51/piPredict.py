@@ -43,15 +43,15 @@ def rgb_video_predict():
 		i=1
 		while i <= nSeglength - nFlowLength + 1:
 						frameid = i
-						image1path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
-						image2path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*nSeglength))
-						image3path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+4*nSeglength))
-						image4path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
-						image5path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+1*nSeglength))
-						image6path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*nSeglength))
-						image7path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+3*nSeglength))
-						image8path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+4*nSeglength))
-						image9path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+5*nSeglength))
+						image1path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid)
+						image2path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid+2*nSeglength)
+						image3path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid+4*nSeglength)
+						image4path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid)
+						image5path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid+1*nSeglength)
+						image6path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid+2*nSeglength)
+						image7path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid+3*nSeglength)
+						image8path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid+4*nSeglength)
+						image9path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid+5*nSeglength)
 
 						image1=transformer.preprocess('data',caffe.io.load_image(image1path))
 						image2=transformer.preprocess('data',caffe.io.load_image(image2path))
