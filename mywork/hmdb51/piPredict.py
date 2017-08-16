@@ -220,3 +220,4 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	return acnum,totalnum
 
 rgb_video_predict()
+print "OK"
