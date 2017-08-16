@@ -219,4 +219,4 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	flowlabel.close()
 	return acnum,totalnum
 
-print rgb_video_predict()
+rgb_video_predict()
