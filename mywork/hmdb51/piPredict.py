@@ -21,7 +21,7 @@ def rgb_video_predict():
 	transformer.set_raw_scale('data', 255)  
 	transformer.set_channel_swap('data', (2,1,0))  
 
-	with open("/home/hadoop/whx/dataset/hmdb51/videotype.txt", "r") as fileVideoType
+	with open("/home/hadoop/whx/dataset/hmdb51/videotype.txt", "r") as fileVideoType:
 		listVideoNameType = fileVideoType.readlines()
 
 	for szLine in listVideoNameType:
