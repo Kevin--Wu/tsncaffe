@@ -28,7 +28,14 @@ def rgb_video_predict():
 		listLine = szLine.split()
 		szVideoName = listLine[0]
 		nVideoType = int(listLine[1])
-		print szVideoName, nVideoType
+		
+		szCurVideoPath = "{}/{}".format(data_root, szVideoName)
+		if not os.path.isdir(szCurVideoPath):
+			raise Exception("No such videodir")
+
+
+	rgbpre.close()
+	rgblabel.close()
 
 
 # 	actdirs=os.listdir(data_root)
