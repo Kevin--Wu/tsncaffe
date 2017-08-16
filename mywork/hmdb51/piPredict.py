@@ -12,8 +12,8 @@ def rgb_video_predict():
 	data_root='/home/hadoop/whx/dataset/hmdb51/jpegs_256'
 	net = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_rgb_deploy.prototxt'), 
 		"{}/{}/{}".format(model_root, szSplitName, 'pi_bn_rgb_withpre_iter_100000.caffemodel'), caffe.TEST)
-	rgbpre=open(caffe_root+'mywork/hmdb51/rgbpredict.txt','w')
-	rgblabel=open(caffe_root+'mywork/hmdb51/rgblabel.txt','w')
+	rgbpre=open("{}/{}".format(caffe_root, 'mywork/hmdb51/rgbpredict.txt'),'w')
+	rgblabel=open("{}/{}".format(caffe_root, 'mywork/hmdb51/rgblabel.txt'),'w')
 
 
 	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
