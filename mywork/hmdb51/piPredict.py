@@ -41,6 +41,9 @@ def rgb_video_predict():
 		nFramenum = len(listFrames)
 		nSeglength = nFramenum//6
 		i=1
+		Bvalue=104
+		Gvalue=117
+		Rvalue=123
 		while i <= nSeglength - nFlowLength + 1:
 						frameid = i
 						image1path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid)
