@@ -1,12 +1,14 @@
 import caffe 
-caffe_root='/home/hadoop/whx/tsncaffe'
-model_root='/home/hadoop/whx/exp-result/model/hmdb51'
-szSplitName = "rgb-split1"
 import numpy as np  
 import scipy
 import sys
 import os
 import random
+
+caffe_root='/home/hadoop/whx/tsncaffe'
+model_root='/home/hadoop/whx/exp-result/model/hmdb51'
+szSplitName = "rgb-split1"
+nFlowLength = 5
 
 def rgb_video_predict():
 	data_root='/home/hadoop/whx/dataset/hmdb51/jpegs_256'
@@ -24,6 +26,8 @@ def rgb_video_predict():
 	with open("/home/hadoop/whx/dataset/hmdb51/videotype.txt", "r") as fileVideoType:
 		listVideoNameType = fileVideoType.readlines()
 
+	nTotal = 0
+	nAcnum = 0
 	for szLine in listVideoNameType:
 		listLine = szLine.split()
 		szVideoName = listLine[0]
@@ -32,108 +36,80 @@ def rgb_video_predict():
 		szCurVideoPath = "{}/{}".format(data_root, szVideoName)
 		if not os.path.isdir(szCurVideoPath):
 			raise Exception("No such videodir")
+		listFrames = os.listdir(szCurVideoPath)
+		listFrames.sort()
+		nFramenum = len(listFrames)
+		nSeglength = nFramenum//6
+		i=1
+		while i <= nSeglength - nFlowLength + 1:
+						frameid = i
+						image1path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
+						image2path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*nSeglength))
+						image3path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+4*nSeglength))
+						image4path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
+						image5path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+1*nSeglength))
+						image6path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*nSeglength))
+						image7path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+3*nSeglength))
+						image8path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+4*nSeglength))
+						image9path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+5*nSeglength))
 
+						image1=transformer.preprocess('data',caffe.io.load_image(image1path))
+						image2=transformer.preprocess('data',caffe.io.load_image(image2path))
+						image3=transformer.preprocess('data',caffe.io.load_image(image3path))
+						image4=transformer.preprocess('data',caffe.io.load_image(image4path))
+						image5=transformer.preprocess('data',caffe.io.load_image(image5path))
+						image6=transformer.preprocess('data',caffe.io.load_image(image6path))
+						image7=transformer.preprocess('data',caffe.io.load_image(image7path))
+						image8=transformer.preprocess('data',caffe.io.load_image(image8path))
+						image9=transformer.preprocess('data',caffe.io.load_image(image9path))
 
+						image1[0]-=Bvalue
+						image1[1]-=Gvalue
+						image1[2]-=Rvalue
+						image2[0]-=Bvalue
+						image2[1]-=Gvalue
+						image2[2]-=Rvalue
+						image3[0]-=Bvalue
+						image3[1]-=Gvalue
+						image3[2]-=Rvalue
+						image4[0]-=Bvalue
+						image4[1]-=Gvalue
+						image4[2]-=Rvalue
+						image5[0]-=Bvalue
+						image5[1]-=Gvalue
+						image5[2]-=Rvalue
+						image6[0]-=Bvalue
+						image6[1]-=Gvalue
+						image6[2]-=Rvalue
+						image7[0]-=Bvalue
+						image7[1]-=Gvalue
+						image7[2]-=Rvalue
+						image8[0]-=Bvalue
+						image8[1]-=Gvalue
+						image8[2]-=Rvalue
+						image9[0]-=Bvalue
+						image9[1]-=Gvalue
+						image9[2]-=Rvalue
+						
+						net.blobs['data'].reshape(9,3,224,224)
+						net.blobs['data'].data[...] = [image1,image2,image3,image4,image5,image6,image7,image8,image9]
+						net.forward()
+
+						out = net.blobs['pool_fc'].data[...]
+						
+					
+						print >> rgbpre, out
+						prob=out.argmax()
+						print (prob,actid)
+						if prob == actid:
+							nAcnum+=1
+						nTotal+=1
+						i+=16
+
+	print nAcnum, nTotal, nAcnum*1.0/nTotal
 	rgbpre.close()
 	rgblabel.close()
 
-
-# 	actdirs=os.listdir(data_root)
-# 	actdirs.sort()
-# 	actid=0
-# 	acnum=0
-# 	totalnum=0
-# 	Bvalue=104
-# 	Gvalue=117
-# 	Rvalue=123
-# 	video_count=1
-# 	for curact in actdirs:
-# 		if os.path.isdir(data_root+curact):
-# 			videodirs=os.listdir(data_root+curact)
-# 			videodirs.sort()
-# 			for curvideo in videodirs:
-# 				if os.path.isdir(data_root+curact+'/'+curvideo):
-# 					framelist=os.listdir(data_root+curact+'/'+curvideo)
-# 					framelist.sort()
-# 					framenum = len(framelist)
-# 					segnums=[3,6]
-# 					seglength=framenum//6
-# 					i=1
-# 					count=0
-# 					totalout=np.zeros((101))
-# 					while i<seglength:
-# 						frameid = i
-# 						image1path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
-# 						image2path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*seglength))
-# 						image3path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+4*seglength))
-# 						image4path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid))
-# 						image5path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+1*seglength))
-# 						image6path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+2*seglength))
-# 						image7path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+3*seglength))
-# 						image8path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+4*seglength))
-# 						image9path=data_root+curact+'/'+curvideo+'/'+('frame{:0>6d}.jpg'.format(frameid+5*seglength))
-
-# 						image1=transformer.preprocess('data',caffe.io.load_image(image1path))
-# 						image2=transformer.preprocess('data',caffe.io.load_image(image2path))
-# 						image3=transformer.preprocess('data',caffe.io.load_image(image3path))
-# 						image4=transformer.preprocess('data',caffe.io.load_image(image4path))
-# 						image5=transformer.preprocess('data',caffe.io.load_image(image5path))
-# 						image6=transformer.preprocess('data',caffe.io.load_image(image6path))
-# 						image7=transformer.preprocess('data',caffe.io.load_image(image7path))
-# 						image8=transformer.preprocess('data',caffe.io.load_image(image8path))
-# 						image9=transformer.preprocess('data',caffe.io.load_image(image9path))
-
-# 						image1[0]-=Bvalue
-# 						image1[1]-=Gvalue
-# 						image1[2]-=Rvalue
-# 						image2[0]-=Bvalue
-# 						image2[1]-=Gvalue
-# 						image2[2]-=Rvalue
-# 						image3[0]-=Bvalue
-# 						image3[1]-=Gvalue
-# 						image3[2]-=Rvalue
-# 						image4[0]-=Bvalue
-# 						image4[1]-=Gvalue
-# 						image4[2]-=Rvalue
-# 						image5[0]-=Bvalue
-# 						image5[1]-=Gvalue
-# 						image5[2]-=Rvalue
-# 						image6[0]-=Bvalue
-# 						image6[1]-=Gvalue
-# 						image6[2]-=Rvalue
-# 						image7[0]-=Bvalue
-# 						image7[1]-=Gvalue
-# 						image7[2]-=Rvalue
-# 						image8[0]-=Bvalue
-# 						image8[1]-=Gvalue
-# 						image8[2]-=Rvalue
-# 						image9[0]-=Bvalue
-# 						image9[1]-=Gvalue
-# 						image9[2]-=Rvalue
-						
-# 						net.blobs['data'].reshape(9,3,224,224)
-# 						net.blobs['data'].data[...] = [image1,image2,image3,image4,image5,image6,image7,image8,image9]
-# 						net.forward()
-
-# 						out = net.blobs['pool_fc'].data[...]
-# 						i+=16
-# 						count+=1
-# 						#totalout=totalout+(out[0][0][0]-totalout)/count
-					
-# 						print >> rgbpre, out
-# 						prob=out.argmax()
-# 	                                        print >> rgblabel, (prob,actid)
-# 						print (prob,actid)
-# 						if prob == actid:
-# 							acnum+=1
-# 						totalnum+=1
-# 					print('video %d done' % video_count);
-# 					video_count+=1
-# 		actid+=1
-# #	rgbpre.write('%d %d\n' % (acnum,totalnum))
-# 	rgbpre.close()
-# 	rgblabel.close()
-# 	return acnum,totalnum
 
 def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	data_root='/home/hadoop/whx/dataset/ucf101/ucf101_flow_img_tvl1_gpu/'
