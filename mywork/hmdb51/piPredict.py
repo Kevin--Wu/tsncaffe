@@ -7,7 +7,7 @@ import random
 
 caffe_root='/home/hadoop/whx/tsncaffe'
 model_root='/home/hadoop/whx/exp-result/model/hmdb51'
-szSplitName = "rgb-split1"
+szSplitName = "rgb-split2"
 nFlowLength = 5
 
 def rgb_video_predict():
@@ -103,8 +103,8 @@ def rgb_video_predict():
 					
 						print >> rgbpre, out
 						prob=out.argmax()
-						print (prob,actid)
-						if prob == actid:
+						print (prob, nVideoType)
+						if prob == nVideoType:
 							nAcnum+=1
 						nTotal+=1
 						i+=16
