@@ -157,15 +157,15 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						while curseg<segnum:
 							frameid = i + curseg*(nFramenum/segnum)
 							j=0
-							imagexpath=data_root+curact+'/'+curvideo+'/'+('flow_x_{:0>4d}.jpg'.format(frameid+j))
-							imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
+							imagexpath="{}/flow_x_{:0>4d}.jpg".format(szCurVideoPath, frameid+j)
+							imageypath="{}/flow_y_{:0>4d}.jpg".format(szCurVideoPath, frameid+j)
 							imagex=caffe.io.load_image(imagexpath,False)
 							imagey=caffe.io.load_image(imageypath,False)
 							imagesg=np.concatenate((transformer.preprocess('data',imagex)-mean_value,transformer.preprocess('data',imagey)-mean_value),axis=0)
 							j+=1
 							while j<flow_length:
-								imagexpath=data_root+curact+'/'+curvideo+'/'+('flow_x_{:0>4d}.jpg'.format(frameid+j))
-								imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
+								imagexpath="{}/flow_x_{:0>4d}.jpg".format(szCurVideoPath, frameid+j)
+								imageypath="{}/flow_y_{:0>4d}.jpg".format(szCurVideoPath, frameid+j)
 								imagex=caffe.io.load_image(imagexpath,False)
 								imagey=caffe.io.load_image(imageypath,False)
 								imagesg=np.concatenate((imagesg,np.concatenate((transformer.preprocess('data',imagex)-mean_value,transformer.preprocess('data',imagey)-mean_value),axis=0)),axis=0)
