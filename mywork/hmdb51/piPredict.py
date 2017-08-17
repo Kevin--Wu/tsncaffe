@@ -8,14 +8,15 @@ import random
 
 caffe_root='/home/hadoop/whx/tsncaffe'
 model_root='/home/hadoop/whx/exp-result/model/hmdb51'
-szSplitName = "rgb-split2"
+szRGBSplitName = "rgb-split2"
+szFlowSplitName = "flow-split1"
 nFlowLength = 5
 
 
 def rgb_video_predict():
 	data_root='/home/hadoop/whx/dataset/hmdb51/jpegs_256'
 	net = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_rgb_deploy.prototxt'), 
-		"{}/{}/{}".format(model_root, szSplitName, 'pi_bn_rgb_withpre_iter_100000.caffemodel'), caffe.TEST)
+		"{}/{}/{}".format(model_root, szRGBSplitName, 'pi_bn_rgb_withpre_iter_100000.caffemodel'), caffe.TEST)
 	rgbpre=open("{}/{}".format(caffe_root, 'mywork/hmdb51/rgbpredict.txt'),'w')
 	rgblabel=open("{}/{}".format(caffe_root, 'mywork/hmdb51/rgblabel.txt'),'w')
 
@@ -119,7 +120,7 @@ def rgb_video_predict():
 def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	data_root='/home/hadoop/whx/dataset/hmdb51/flowjpg'
 	net = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_flow_deploy.prototxt'), 
-		"{}/{}/{}".format(model_root, szSplitName, 'pi_bn_flow_withpre_iter_80000.caffemodel'), caffe.TEST)
+		"{}/{}/{}".format(model_root, szFlowSplitName, 'pi_bn_flow_withpre_iter_80000.caffemodel'), caffe.TEST)
 	flowpre=open("{}/{}".format(caffe_root, 'mywork/hmdb51/flowpredict.txt'),'w')
 
 
