@@ -148,14 +148,14 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 		nSeglength = nFramenum//6
 		i=1
 					
-					while i <= nSeglength - nFlowLength + 1:
+	        while i <= nSeglength - nFlowLength + 1:
 						curseg=0
 						inputId=0
 						inputdata=np.zeros((9,10,224,224))
 						isreuse=True
 						segnum = 6
 						while curseg<segnum:
-							frameid = i + curseg*(framenum/segnum)
+							frameid = i + curseg*(nFramenum/segnum)
 							j=0
 							imagexpath=data_root+curact+'/'+curvideo+'/'+('flow_x_{:0>4d}.jpg'.format(frameid+j))
 							imageypath=data_root+curact+'/'+curvideo+'/'+('flow_y_{:0>4d}.jpg'.format(frameid+j))
