@@ -5,10 +5,12 @@ import sys
 import os
 import random
 
+
 caffe_root='/home/hadoop/whx/tsncaffe'
 model_root='/home/hadoop/whx/exp-result/model/hmdb51'
 szSplitName = "rgb-split2"
 nFlowLength = 5
+
 
 def rgb_video_predict():
 	data_root='/home/hadoop/whx/dataset/hmdb51/jpegs_256'
@@ -115,10 +117,10 @@ def rgb_video_predict():
 
 
 def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
-	data_root='/home/hadoop/whx/dataset/ucf101/ucf101_flow_img_tvl1_gpu/'
-	net = caffe.Net(caffe_root + 'mywork/ucf101/pi_tsn_bn_inception_flow_deploy.prototxt',model_root +'model/pi-bn-ucf1-flow-withpre/pi_ucf101_split1_tsn_flow_bn_inception_iter_80000.caffemodel',caffe.TEST)
-	flowpre=open(caffe_root+'mywork/ucf101/flowpredict.txt','w')
-	flowlabel=open(caffe_root+'mywork/ucf101/flowlabel.txt','w')
+	data_root='/home/hadoop/whx/dataset/hmdb51/flowjpg'
+	net = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_flow_deploy.prototxt'), 
+		"{}/{}/{}".format(model_root, szSplitName, 'pi_bn_flow_withpre_iter_80000.caffemodel'), caffe.TEST)
+	flowpre=open("{}/{}".format(caffe_root, 'mywork/hmdb51/flowpredict.txt'),'w')
 
 
 	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
@@ -126,33 +128,31 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	transformer.set_raw_scale('data', 255)  
 	mean_value=128
 
-	actdirs=os.listdir(data_root)
-	actdirs.sort()
-	actid=0
-	acnum=0
-	totalnum=0
-        videonum=1
-	for curact in actdirs:
-		if os.path.isdir(data_root+curact):
-			videodirs=os.listdir(data_root+curact)
-			videodirs.sort()
-			for curvideo in videodirs:
-				if os.path.isdir(data_root+curact+'/'+curvideo):
-					framelist=os.listdir(data_root+curact+'/'+curvideo)
-					framelist.sort()
-					framenum = len(framelist)/2
-					i=1
-					count=0
-					segnum=6
-					flow_length=5
-					stopid=(framenum/segnum)-flow_length*2+1
-					totalout=np.zeros((101))
+	with open("/home/hadoop/whx/dataset/hmdb51/videotype.txt", "r") as fileVideoType:
+		listVideoNameType = fileVideoType.readlines()
+
+	nTotal = 0
+	nAcnum = 0
+	for szLine in listVideoNameType:
+		listLine = szLine.split()
+		szVideoName = listLine[0]
+		nVideoType = int(listLine[1])
+		
+		szCurVideoPath = "{}/{}".format(data_root, szVideoName)
+		if not os.path.isdir(szCurVideoPath):
+			raise Exception("No such videodir")
+		listFrames = os.listdir(szCurVideoPath)
+		listFrames.sort()
+		nFramenum = len(listFrames)/2
+		nSeglength = nFramenum//6
+		i=1
 					
-					while i<stopid:
+					while i <= nSeglength - nFlowLength + 1:
 						curseg=0
 						inputId=0
 						inputdata=np.zeros((9,10,224,224))
 						isreuse=True
+						segnum = 6
 						while curseg<segnum:
 							frameid = i + curseg*(framenum/segnum)
 							j=0
@@ -184,26 +184,17 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-						i+=32
-						count+=1
-						#totalout=totalout+(out[0][0][0]-totalout)/count
+						print >> flowpre, out
+						prob=out.argmax()
+						print (prob, nVideoType)
+						if prob == nVideoType:
+							nAcnum+=1
+						nTotal+=1
+						i+=16
 
 					
 					
-					        print >> flowpre, out
-					        prob=out.argmax()
-    					        flowlabel.write('%d %d\n' % (prob,actid))
-                                                print prob,actid
-					        if prob == actid:
-						    acnum+=1
-					        totalnum+=1
-                                        print("video %d done" % videonum)
-                                        videonum+=1
-		actid+=1
-#	rgbpre.write('%d %d\n' % (acnum,totalnum))
 	flowpre.close()
-	flowlabel.close()
-	return acnum,totalnum
 
-rgb_video_predict()
+flow_video_predict()
 print "OK"
