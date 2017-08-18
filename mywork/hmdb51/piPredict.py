@@ -67,7 +67,7 @@ def fusion_predict():
 			flowout = flow_video_predict_commit(i, nFlowFramenum, nSeglength, szFlowCurVideoPath, flownet, flowtransformer)
 			out = rgbout + flowout
 			prob=out.argmax()
-       		print (prob, nVideoType)
+			print (prob, nVideoType)
 			if prob == nVideoType:
 				nAcnum+=1
 			nTotal+=1
@@ -278,4 +278,5 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 
 #rgb_video_predict()
 # flow_video_predict()
+fusion_predict()
 print "OK"
