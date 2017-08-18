@@ -13,6 +13,71 @@ szFlowSplitName = "flow-split2"
 nFlowLength = 5
 
 
+def fusion_predict():
+	rgbdata_root='/home/hadoop/whx/dataset/hmdb51/jpegs_256'
+	rgbnet = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_rgb_deploy.prototxt'), 
+		"{}/{}/{}".format(model_root, szRGBSplitName, 'pi_bn_rgb_withpre_iter_100000.caffemodel'), caffe.TEST)
+	rgbtransformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
+	rgbtransformer.set_transpose('data', (2,0,1))
+	rgbtransformer.set_raw_scale('data', 255)  
+	rgbtransformer.set_channel_swap('data', (2,1,0))  
+
+	flowdata_root='/home/hadoop/whx/dataset/hmdb51/flowjpg'
+	flownet = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_flow_deploy.prototxt'), 
+		"{}/{}/{}".format(model_root, szFlowSplitName, 'pi_bn_flow_withpre_iter_80000.caffemodel'), caffe.TEST)
+	flowtransformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
+	flowtransformer.set_transpose('data', (2,0,1))
+	flowtransformer.set_raw_scale('data', 255)  
+
+
+
+	with open("/home/hadoop/whx/dataset/hmdb51/videotype.txt", "r") as fileVideoType:
+		listVideoNameType = fileVideoType.readlines()
+
+	nTotal = 0
+	nAcnum = 0
+	for szLine in listVideoNameType:
+		listLine = szLine.split()
+		szVideoName = listLine[0]
+		nVideoType = int(listLine[1])
+
+		szRgbCurVideoPath = "{}/{}".format(rgbdata_root, szVideoName)
+		if not os.path.isdir(szRgbCurVideoPath):
+			raise Exception("No such videodir")
+		szFlowCurVideoPath = "{}/{}".format(flowdata_root, szVideoName)
+		if not os.path.isdir(szFlowCurVideoPath):
+			raise Exception("No such videodir")
+
+		listFrames = os.listdir(szRgbCurVideoPath)
+		listFrames.sort()
+		nRgbFramenum = len(listFrames)
+
+		listFrames = os.listdir(szFlowCurVideoPath)
+		listFrames.sort()
+		nFlowFramenum = len(listFrames)/2
+
+		if nRgbFramenum != nFlowFramenum:
+			print szVideoName
+			raise Exception("Non-equal framenums between rgb and flow data")
+
+		nSeglength = nFlowFramenum//6
+		i=1
+		while i <= nSeglength - nFlowLength + 1:
+			rgbout = rgb_video_predict_commit(i, nSeglength, szRgbCurVideoPath, rgbnet, rgbtransformer)
+			flowout = flow_video_predict_commit(i, nFlowFramenum, nSeglength, szFlowCurVideoPath, flownet, flowtransformer)
+			out = rgbout + flowout
+			prob=out.argmax()
+       		print (prob, nVideoType)
+			if prob == nVideoType:
+				nAcnum+=1
+			nTotal+=1
+			i+=16
+
+	print nAcnum, nTotal, nAcnum*1.0/nTotal
+
+
+
+
 def rgb_video_predict():
 	data_root='/home/hadoop/whx/dataset/hmdb51/jpegs_256'
 	net = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_rgb_deploy.prototxt'), 
@@ -122,53 +187,8 @@ def rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net, transformer):
 						return out
 
 
-def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
-	data_root='/home/hadoop/whx/dataset/hmdb51/flowjpg'
-	net = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_flow_deploy.prototxt'), 
-		"{}/{}/{}".format(model_root, szFlowSplitName, 'pi_bn_flow_withpre_iter_80000.caffemodel'), caffe.TEST)
-	flowpre=open("{}/{}".format(caffe_root, 'mywork/hmdb51/flowpredict.txt'),'w')
-
-
-	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
-	transformer.set_transpose('data', (2,0,1))
-	transformer.set_raw_scale('data', 255)  
-
-	with open("/home/hadoop/whx/dataset/hmdb51/videotype.txt", "r") as fileVideoType:
-		listVideoNameType = fileVideoType.readlines()
-
-	nTotal = 0
-	nAcnum = 0
-	for szLine in listVideoNameType:
-		listLine = szLine.split()
-		szVideoName = listLine[0]
-		nVideoType = int(listLine[1])
-		
-		szCurVideoPath = "{}/{}".format(data_root, szVideoName)
-		if not os.path.isdir(szCurVideoPath):
-			raise Exception("No such videodir")
-		listFrames = os.listdir(szCurVideoPath)
-		listFrames.sort()
-		nFramenum = len(listFrames)/2
-		nSeglength = nFramenum//6
-		i=1
-                while i <= nSeglength - nFlowLength + 1:
-        		out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net, transformer)
-	        	print >> flowpre, out
-                        prob=out.argmax()
-        		print (prob, nVideoType)
-        	        if prob == nVideoType:
-	        	    nAcnum+=1
-	                nTotal+=1
-        	        i+=16
-
-					
-					
-	print nAcnum, nTotal, nAcnum*1.0/nTotal
-	flowpre.close()
-
-
 def flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net, transformer):
-	                                        mean_value=128
+						mean_value=128
 						curseg=0
 						inputId=0
 						inputdata=np.zeros((9,10,224,224))
@@ -206,8 +226,56 @@ def flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net, tra
 
 						out = net.blobs['pool_fc'].data[...]
 						return out
+
+
+def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
+	data_root='/home/hadoop/whx/dataset/hmdb51/flowjpg'
+	net = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_flow_deploy.prototxt'), 
+		"{}/{}/{}".format(model_root, szFlowSplitName, 'pi_bn_flow_withpre_iter_80000.caffemodel'), caffe.TEST)
+	flowpre=open("{}/{}".format(caffe_root, 'mywork/hmdb51/flowpredict.txt'),'w')
+
+
+	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
+	transformer.set_transpose('data', (2,0,1))
+	transformer.set_raw_scale('data', 255)  
+
+	with open("/home/hadoop/whx/dataset/hmdb51/videotype.txt", "r") as fileVideoType:
+		listVideoNameType = fileVideoType.readlines()
+
+	nTotal = 0
+	nAcnum = 0
+	for szLine in listVideoNameType:
+		listLine = szLine.split()
+		szVideoName = listLine[0]
+		nVideoType = int(listLine[1])
+		
+		szCurVideoPath = "{}/{}".format(data_root, szVideoName)
+		if not os.path.isdir(szCurVideoPath):
+			raise Exception("No such videodir")
+		listFrames = os.listdir(szCurVideoPath)
+		listFrames.sort()
+		nFramenum = len(listFrames)/2
+		nSeglength = nFramenum//6
+		i=1
+		while i <= nSeglength - nFlowLength + 1:
+			out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net, transformer)
+			print >> flowpre, out
+			prob=out.argmax()
+       		print (prob, nVideoType)
+			if prob == nVideoType:
+				nAcnum+=1
+			nTotal+=1
+			i+=16
+
+					
+					
+	print nAcnum, nTotal, nAcnum*1.0/nTotal
+	flowpre.close()
+
+
+
 						
 
 #rgb_video_predict()
-flow_video_predict()
+# flow_video_predict()
 print "OK"
