@@ -44,10 +44,27 @@ def rgb_video_predict():
 		nFramenum = len(listFrames)
 		nSeglength = nFramenum//6
 		i=1
-		Bvalue=104
-		Gvalue=117
-		Rvalue=123
 		while i <= nSeglength - nFlowLength + 1:
+						out = rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net):
+						
+					
+						print >> rgbpre, out
+						prob=out.argmax()
+						print (prob, nVideoType)
+						if prob == nVideoType:
+							nAcnum+=1
+						nTotal+=1
+						i+=16
+
+	print nAcnum, nTotal, nAcnum*1.0/nTotal
+	rgbpre.close()
+	rgblabel.close()
+
+
+def rgb_video_predict_commit():
+						Bvalue=104
+						Gvalue=117
+						Rvalue=123
 						frameid = i
 						image1path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid)
 						image2path='{}/frame{:0>6d}.jpg'.format(szCurVideoPath, frameid+2*nSeglength)
@@ -102,19 +119,7 @@ def rgb_video_predict():
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-						
-					
-						print >> rgbpre, out
-						prob=out.argmax()
-						print (prob, nVideoType)
-						if prob == nVideoType:
-							nAcnum+=1
-						nTotal+=1
-						i+=16
-
-	print nAcnum, nTotal, nAcnum*1.0/nTotal
-	rgbpre.close()
-	rgblabel.close()
+						return out
 
 
 def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
@@ -148,7 +153,23 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 		nSeglength = nFramenum//6
 		i=1
 					
-	        while i <= nSeglength - nFlowLength + 1:
+	    while i <= nSeglength - nFlowLength + 1:
+						out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net)
+						print >> flowpre, out
+						prob=out.argmax()
+						print (prob, nVideoType)
+						if prob == nVideoType:
+							nAcnum+=1
+						nTotal+=1
+						i+=16
+
+					
+					
+	print nAcnum, nTotal, nAcnum*1.0/nTotal
+	flowpre.close()
+
+
+def flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net):
 						curseg=0
 						inputId=0
 						inputdata=np.zeros((9,10,224,224))
@@ -185,18 +206,9 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						net.forward()
 
 						out = net.blobs['pool_fc'].data[...]
-						print >> flowpre, out
-						prob=out.argmax()
-						print (prob, nVideoType)
-						if prob == nVideoType:
-							nAcnum+=1
-						nTotal+=1
-						i+=16
+						return out
+						
 
-					
-					
-	print nAcnum, nTotal, nAcnum*1.0/nTotal
-	flowpre.close()
-
+rgb_video_predict()
 flow_video_predict()
 print "OK"
