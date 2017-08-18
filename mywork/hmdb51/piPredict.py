@@ -9,7 +9,7 @@ import random
 caffe_root='/home/hadoop/whx/tsncaffe'
 model_root='/home/hadoop/whx/exp-result/model/hmdb51'
 szRGBSplitName = "rgb-split2"
-szFlowSplitName = "flow-split1"
+szFlowSplitName = "flow-split2"
 nFlowLength = 5
 
 
@@ -163,7 +163,7 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 							imagey=caffe.io.load_image(imageypath,False)
 							imagesg=np.concatenate((transformer.preprocess('data',imagex)-mean_value,transformer.preprocess('data',imagey)-mean_value),axis=0)
 							j+=1
-							while j<flow_length:
+							while j<nFlowLength:
 								imagexpath="{}/flow_x_{:0>4d}.jpg".format(szCurVideoPath, frameid+j)
 								imageypath="{}/flow_y_{:0>4d}.jpg".format(szCurVideoPath, frameid+j)
 								imagex=caffe.io.load_image(imagexpath,False)
@@ -195,6 +195,7 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 
 					
 					
+	print nAcnum, nTotal, nAcnum*1.0/nTotal
 	flowpre.close()
 
 flow_video_predict()
