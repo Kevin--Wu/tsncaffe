@@ -45,7 +45,7 @@ def rgb_video_predict():
 		nSeglength = nFramenum//6
 		i=1
 		while i <= nSeglength - nFlowLength + 1:
-						out = rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net):
+						out = rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net)
 						
 					
 						print >> rgbpre, out
@@ -153,15 +153,15 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 		nSeglength = nFramenum//6
 		i=1
 					
-	    while i <= nSeglength - nFlowLength + 1:
-						out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net)
-						print >> flowpre, out
-						prob=out.argmax()
-						print (prob, nVideoType)
-						if prob == nVideoType:
-							nAcnum+=1
-						nTotal+=1
-						i+=16
+                while i <= nSeglength - nFlowLength + 1:
+        		out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net)
+	        	print >> flowpre, out
+                        prob=out.argmax()
+        		print (prob, nVideoType)
+        	        if prob == nVideoType:
+	        	    nAcnum+=1
+	                nTotal+=1
+        	        i+=16
 
 					
 					
