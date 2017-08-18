@@ -61,7 +61,7 @@ def rgb_video_predict():
 	rgblabel.close()
 
 
-def rgb_video_predict_commit():
+def rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net):
 						Bvalue=104
 						Gvalue=117
 						Rvalue=123
@@ -153,7 +153,7 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 		nSeglength = nFramenum//6
 		i=1
 					
-                while i <= nSeglength - nFlowLength + 1:
+        while i <= nSeglength - nFlowLength + 1:
         		out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net)
 	        	print >> flowpre, out
                         prob=out.argmax()
