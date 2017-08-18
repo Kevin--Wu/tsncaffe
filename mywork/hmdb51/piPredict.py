@@ -45,7 +45,7 @@ def rgb_video_predict():
 		nSeglength = nFramenum//6
 		i=1
 		while i <= nSeglength - nFlowLength + 1:
-						out = rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net)
+						out = rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net, transformer)
 						
 					
 						print >> rgbpre, out
@@ -61,7 +61,7 @@ def rgb_video_predict():
 	rgblabel.close()
 
 
-def rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net):
+def rgb_video_predict_commit(i, nSeglength, szCurVideoPath, net, transformer):
 						Bvalue=104
 						Gvalue=117
 						Rvalue=123
@@ -132,7 +132,6 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
 	transformer.set_transpose('data', (2,0,1))
 	transformer.set_raw_scale('data', 255)  
-	mean_value=128
 
 	with open("/home/hadoop/whx/dataset/hmdb51/videotype.txt", "r") as fileVideoType:
 		listVideoNameType = fileVideoType.readlines()
@@ -152,9 +151,8 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 		nFramenum = len(listFrames)/2
 		nSeglength = nFramenum//6
 		i=1
-					
-        while i <= nSeglength - nFlowLength + 1:
-        		out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net)
+                while i <= nSeglength - nFlowLength + 1:
+        		out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net, transformer)
 	        	print >> flowpre, out
                         prob=out.argmax()
         		print (prob, nVideoType)
@@ -169,7 +167,8 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	flowpre.close()
 
 
-def flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net):
+def flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net, transformer):
+	                                        mean_value=128
 						curseg=0
 						inputId=0
 						inputdata=np.zeros((9,10,224,224))
@@ -209,6 +208,6 @@ def flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net):
 						return out
 						
 
-rgb_video_predict()
+#rgb_video_predict()
 flow_video_predict()
 print "OK"
