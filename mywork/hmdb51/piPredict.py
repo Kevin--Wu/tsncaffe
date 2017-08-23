@@ -8,8 +8,8 @@ import random
 
 caffe_root='/home/hadoop/whx/tsncaffe'
 model_root='/home/hadoop/whx/exp-result/model/hmdb51'
-szRGBSplitName = "rgb-split2"
-szFlowSplitName = "flow-split2"
+szRGBSplitName = "rgb-split3"
+szFlowSplitName = "flow-split3"
 nFlowLength = 5
 
 
@@ -17,7 +17,7 @@ def fusion_predict():
 	rgbdata_root='/home/hadoop/whx/dataset/hmdb51/jpegs_256'
 	rgbnet = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_rgb_deploy.prototxt'), 
 		"{}/{}/{}".format(model_root, szRGBSplitName, 'pi_bn_rgb_withpre_iter_100000.caffemodel'), caffe.TEST)
-	rgbtransformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
+	rgbtransformer = caffe.io.Transformer({'data': rgbnet.blobs['data'].data.shape})
 	rgbtransformer.set_transpose('data', (2,0,1))
 	rgbtransformer.set_raw_scale('data', 255)  
 	rgbtransformer.set_channel_swap('data', (2,1,0))  
@@ -25,7 +25,7 @@ def fusion_predict():
 	flowdata_root='/home/hadoop/whx/dataset/hmdb51/flowjpg'
 	flownet = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_flow_deploy.prototxt'), 
 		"{}/{}/{}".format(model_root, szFlowSplitName, 'pi_bn_flow_withpre_iter_80000.caffemodel'), caffe.TEST)
-	flowtransformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
+	flowtransformer = caffe.io.Transformer({'data': flownet.blobs['data'].data.shape})
 	flowtransformer.set_transpose('data', (2,0,1))
 	flowtransformer.set_raw_scale('data', 255)  
 
@@ -57,8 +57,9 @@ def fusion_predict():
 		nFlowFramenum = len(listFrames)/2
 
 		if nRgbFramenum != nFlowFramenum:
-			print szVideoName
-			raise Exception("Non-equal framenums between rgb and flow data")
+#			print szVideoName
+#			raise Exception("Non-equal framenums between rgb and flow data")
+                        nRgbFramenum = nFlowFramenum
 
 		nSeglength = nFlowFramenum//6
 		i=1
@@ -261,7 +262,7 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 			out = flow_video_predict_commit(i, nFramenum, nSeglength, szCurVideoPath, net, transformer)
 			print >> flowpre, out
 			prob=out.argmax()
-       		print (prob, nVideoType)
+                        print (prob, nVideoType)
 			if prob == nVideoType:
 				nAcnum+=1
 			nTotal+=1
@@ -277,6 +278,6 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						
 
 #rgb_video_predict()
-# flow_video_predict()
-fusion_predict()
+flow_video_predict()
+#fusion_predict()
 print "OK"
