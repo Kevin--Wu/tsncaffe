@@ -62,7 +62,7 @@ def fusion_predict():
                         nRgbFramenum = nFlowFramenum
 
 		i=1
-		while i <= nSeglength - nFlowLength + 1:
+		while i <= nRgbFramenum - nFlowLength + 1:
 			rgbout = rgb_video_predict_commit(i, szRgbCurVideoPath, rgbnet, rgbtransformer)
 			flowout = flow_video_predict_commit(i, szFlowCurVideoPath, flownet, flowtransformer)
 			out = rgbout + flowout
@@ -71,7 +71,7 @@ def fusion_predict():
 			if prob == nVideoType:
 				nAcnum+=1
 			nTotal+=1
-			i+=1
+			i+=2
 
 	print nAcnum, nTotal, nAcnum*1.0/nTotal
 
@@ -114,7 +114,7 @@ def rgb_video_predict():
 						if prob == nVideoType:
 							nAcnum+=1
 						nTotal+=1
-						i+=1
+						i+=2
 
 	print nAcnum, nTotal, nAcnum*1.0/nTotal
 
@@ -174,6 +174,8 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 	data_root='/home/hadoop/whx/dataset/hmdb51/flowjpg'
 	net = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_flow_frame_deploy.prototxt'), 
 		"{}/{}/{}".format(model_root, szFlowSplitName, 'pi_bn_flow_withpre_iter_80000.caffemodel'), caffe.TEST)
+#        net = caffe.Net("/home/hadoop/whx/temporal-segment-network/models/hmdb51/tsn_bn_inception_flow_deploy.prototxt",  
+#                "/home/hadoop/whx/temporal-segment-network/models/hmdb51_split_1_tsn_flow_reference_bn_inception.caffemodel", caffe.TEST)
 
 
 	transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
@@ -205,7 +207,7 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 			if prob == nVideoType:
 				nAcnum+=1
 			nTotal+=1
-			i+=1
+			i+=16
 
 					
 					
@@ -216,6 +218,6 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						
 
 #rgb_video_predict()
-flow_video_predict()
-#fusion_predict()
+#flow_video_predict()
+fusion_predict()
 print "OK"
