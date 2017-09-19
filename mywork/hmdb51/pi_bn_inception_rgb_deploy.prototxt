@@ -750,4 +750,4 @@ layer { name: "fc-action" type: "InnerProduct" bottom: "global_pool" top: "fc"
 layer { name: "reshape_fc" bottom: "fc" top: "reshape_fc" type: "Reshape"
   reshape_param { shape { dim: [-1, 1, 9, 51 ] } }}
 layer { name: "pool_fusion" bottom: "reshape_fc" top: "pool_fc" type: "Pooling"
-  pooling_param { pool: AVE kernel_h: 9 kernel_w: 1} }
+  pooling_param { pool: MAX kernel_h: 9 kernel_w: 1} }
