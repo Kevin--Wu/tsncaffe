@@ -8,8 +8,8 @@ import random
 
 caffe_root='/home/hadoop/whx/tsncaffe'
 model_root='/home/hadoop/whx/exp-result/model/hmdb51'
-szRGBSplitName = "rgb-split3"
-szFlowSplitName = "flow-split3"
+szRGBSplitName = "rgb-split1"
+szFlowSplitName = "flow-split1"
 nFlowLength = 5
 
 
@@ -66,7 +66,17 @@ def fusion_predict():
 		while i <= nSeglength - nFlowLength + 1:
 			rgbout = rgb_video_predict_commit(i, nSeglength, szRgbCurVideoPath, rgbnet, rgbtransformer)
 			flowout = flow_video_predict_commit(i, nFlowFramenum, nSeglength, szFlowCurVideoPath, flownet, flowtransformer)
-			out = rgbout + flowout
+
+			szFusionType = "MAX"
+			if szFusionType == "AVE":
+				out = rgbout + flowout
+			elif szFusionType == "MAX":
+				for i in range(0, len(rgbout)):
+					rgbout[i] = rgbout[i] if rgbout[i] > flowout[i] else flowout[i]
+				out = rgbout
+
+
+
 			prob=out.argmax()
 			print (prob, nVideoType)
 			if prob == nVideoType:
@@ -278,6 +288,6 @@ def flow_video_predict():	#The format of flow imgs is flowx flowy flowx flowy
 						
 
 #rgb_video_predict()
-flow_video_predict()
-#fusion_predict()
+#flow_video_predict()
+fusion_predict()
 print "OK"
