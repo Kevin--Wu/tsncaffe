@@ -69,11 +69,11 @@ def fusion_predict():
 
 			szFusionType = "MAX"
 			if szFusionType == "AVE":
-				out = rgbout + flowout
+                            out = rgbout + flowout
 			elif szFusionType == "MAX":
-				for i in range(0, len(rgbout)):
-					rgbout[i] = rgbout[i] if rgbout[i] > flowout[i] else flowout[i]
-				out = rgbout
+                            for nId in range(0, len(rgbout[0,0,0])):
+                                rgbout[0,0,0,nId] = rgbout[0,0,0,nId] if rgbout[0,0,0,nId] > flowout[0,0,0,nId] else flowout[0,0,0,nId]
+                            out = rgbout
 
 
 
@@ -82,8 +82,8 @@ def fusion_predict():
 			if prob == nVideoType:
 				nAcnum+=1
 			nTotal+=1
-			i+=16
-
+			i+=2
+                
 	print nAcnum, nTotal, nAcnum*1.0/nTotal
 
 
