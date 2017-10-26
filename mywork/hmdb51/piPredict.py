@@ -36,6 +36,8 @@ def fusion_predict():
 
 	nTotal = 0
 	nAcnum = 0
+
+        listweight = [ [ 0.5 for listYid in range(51) ] for listXid in range(2) ]
 	for szLine in listVideoNameType:
 		listLine = szLine.split()
 		szVideoName = listLine[0]
@@ -67,24 +69,40 @@ def fusion_predict():
 			rgbout = rgb_video_predict_commit(i, nSeglength, szRgbCurVideoPath, rgbnet, rgbtransformer)
 			flowout = flow_video_predict_commit(i, nFlowFramenum, nSeglength, szFlowCurVideoPath, flownet, flowtransformer)
 
-			szFusionType = "MAX"
+			szFusionType = "AVEweight"
 			if szFusionType == "AVE":
                             out = rgbout + flowout
 			elif szFusionType == "MAX":
                             for nId in range(0, len(rgbout[0,0,0])):
                                 rgbout[0,0,0,nId] = rgbout[0,0,0,nId] if rgbout[0,0,0,nId] > flowout[0,0,0,nId] else flowout[0,0,0,nId]
                             out = rgbout
-
+                        elif szFusionType == "AVEweight":
+                            out = rgbout
+                            for nId in range(0, len(rgbout[0,0,0])):
+                                out[0,0,0,nId] = rgbout[0,0,0,nId] * listweight[0][nId] + flowout[0,0,0,nId] * listweight[1][nId]
 
 
 			prob=out.argmax()
 			print (prob, nVideoType)
 			if prob == nVideoType:
-				nAcnum+=1
+			    nAcnum+=1
 			nTotal+=1
 			i+=2
+                        
                 
 	print nAcnum, nTotal, nAcnum*1.0/nTotal
+
+
+
+def train_fusion_weight(out, rgbout, flowout, listweight):
+    nProbId = out.argmax()
+    nRgbout = rgbout[0,0,0,nProbId]
+    nFlowout = flowout[0,0,0,nProbId]
+    
+    listweight[0][nProbId] = nRgbout / ( nRgbout + nFlowout )
+    listweight[1][nProbId] = nFlowout / ( nRgbout + nFlowout )
+
+    return
 
 
 
