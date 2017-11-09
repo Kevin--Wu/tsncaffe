@@ -4,12 +4,14 @@ import scipy
 import sys
 import os
 import random
+import pickle
 
 
 caffe_root='/home/hadoop/whx/tsncaffe'
 model_root='/home/hadoop/whx/exp-result/model/hmdb51'
 szRGBSplitName = "rgb-split1"
 szFlowSplitName = "flow-split1"
+szWeightfilename = "fusionweight1"
 nFlowLength = 5
 
 
@@ -37,7 +39,8 @@ def fusion_predict():
 	nTotal = 0
 	nAcnum = 0
 
-        listweight = [ [ 0.5 for listYid in range(51) ] for listXid in range(2) ]
+	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/{}".format(szWeightfilename),"r") as fusionweight:
+		listweight = pickle.load(fusionweight)
 	for szLine in listVideoNameType:
 		listLine = szLine.split()
 		szVideoName = listLine[0]
