@@ -14,7 +14,7 @@ szFlowSplitName = "flow-split1"
 szTrainsplit = "TrainSplit1"
 szWeightfilename = "fusionweight1"
 nFlowLength = 5
-nEpochsize = 5
+nEpochsize = 1
 
 
 def fusion_predict():
@@ -36,7 +36,7 @@ def fusion_predict():
 
 
 	with open("/home/hadoop/whx/dataset/hmdb51/{}.txt".format(szTrainsplit), "r") as fileVideoType:
-		listVideoNameType = fileVideoType.readlines() # 注意：得到的是flow的路径，rgb的需要替换
+		listVideoNameType = fileVideoType.readlines() # You need to REPLACE the flowjpg with rgb(jepgs_256)
 
 	nTotal = 0
 	nAcnum = 0
@@ -88,8 +88,8 @@ def fusion_predict():
 
 		nepochnum += 1
 
-	with open("home/hadoop/whx/tsncaffe/mywork/hmdb51/{}".format(szWeightfilename),"w") as fusionweight:
-		pickle.dump(listweight, szWeightfilename)
+	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/{}".format(szWeightfilename),"w") as fusionweight:
+		pickle.dump(listweight, fusionweight)
 
 	print nAcnum, nTotal, nAcnum*1.0/nTotal
 	return
