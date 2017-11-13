@@ -10,6 +10,7 @@ caffe_root='/home/hadoop/whx/tsncaffe'
 model_root='/home/hadoop/whx/exp-result/model/hmdb51'
 szRGBSplitName = "rgb-split1"
 szFlowSplitName = "flow-split1"
+szWeightfilename = "fusionweight1"
 nFlowLength = 5
 
 
