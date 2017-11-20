@@ -4,6 +4,7 @@ import scipy
 import sys
 import os
 import random
+import pickle
 
 
 caffe_root='/home/hadoop/whx/tsncaffe'

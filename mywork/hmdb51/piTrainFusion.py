@@ -14,7 +14,7 @@ szFlowSplitName = "flow-split1"
 szTrainsplit = "TrainSplit1"
 szWeightfilename = "fusionweight1"
 nFlowLength = 5
-nEpochsize = 1
+nEpochsize = 50
 
 
 def fusion_predict():
@@ -79,7 +79,7 @@ def fusion_predict():
 
 				out = rgbout + flowout
 				prob=out.argmax()
-				print (prob, nVideoType)
+				#print (prob, nVideoType)
 				if prob == nVideoType:
 					train_fusion_weight(out, rgbout, flowout, listweight)
 					nAcnum+=1
@@ -87,6 +87,7 @@ def fusion_predict():
 				i+=2
 
 		nepochnum += 1
+                print nepochnum
 
 	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/{}".format(szWeightfilename),"w") as fusionweight:
 		pickle.dump(listweight, fusionweight)
