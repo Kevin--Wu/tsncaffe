@@ -17,7 +17,7 @@ nFlowLength = 5
 nEpochsize = 50
 
 
-def fusion_predict():
+def record_fusion():
 	rgbdata_root='/home/hadoop/whx/dataset/hmdb51/jpegs_256'
 	rgbnet = caffe.Net("{}/{}".format(caffe_root, 'mywork/hmdb51/pi_bn_inception_rgb_frame_deploy.prototxt'), 
 		"{}/{}/{}".format(model_root, szRGBSplitName, 'pi_bn_rgb_withpre_iter_100000.caffemodel'), caffe.TEST)
@@ -40,9 +40,11 @@ def fusion_predict():
 
 	nTotal = 0
 	nAcnum = 0
-	listweight = [ [ 0.5 for listYid in range(51) ] for listXid in range(2) ]
+	# listweight = [ [ 0.5 for listYid in range(51) ] for listXid in range(2) ]
 
 	nepochnum = 1
+	listOutput = None
+
 	while nepochnum <= nEpochsize:
 		for szLine in listVideoNameType:
 			listLine = szLine.split()
@@ -73,17 +75,29 @@ def fusion_predict():
 			while i <= nRgbFramenum - nFlowLength + 1:
 				rgbout = rgb_video_predict_commit(i, szRgbCurVideoPath, rgbnet, rgbtransformer)
 				flowout = flow_video_predict_commit(i, szFlowCurVideoPath, flownet, flowtransformer)
-				out = rgbout
-				for nId in range(0, len(rgbout[0,0,0])):
-					out[0,0,0,nId] = rgbout[0,0,0,nId] * listweight[0][nId] + flowout[0,0,0,nId] * listweight[1][nId]
+				# out = rgbout
+				# for nId in range(0, len(rgbout[0,0,0])):
+				# 	out[0,0,0,nId] = rgbout[0,0,0,nId] * listweight[0][nId] + flowout[0,0,0,nId] * listweight[1][nId]
 
-				out = rgbout + flowout
-				prob=out.argmax()
-				#print (prob, nVideoType)
-				if prob == nVideoType:
-					train_fusion_weight(out, rgbout, flowout, listweight)
-					nAcnum+=1
-				nTotal+=1
+				# out = rgbout + flowout
+				# prob=out.argmax()
+				# #print (prob, nVideoType)
+				# if prob == nVideoType:
+				# 	train_fusion_weight(out, rgbout, flowout, listweight)
+				# 	nAcnum+=1
+				# nTotal+=1
+				if listOutput:
+					listOutput.concatenate((listOutput, rgbout), axis = 0)
+					listOutput.concatenate((listOutput, flowout), axis = 0)
+				else:
+					listOutput = rgbout
+					listOutput.concatenate((listOutput, flowout), axis = 0)
+				print listOutput
+				print listOutput.ndim
+				print rgbout.ndim, "   ", flowout.ndim
+				return
+
+
 				i+=2
 
 		nepochnum += 1
