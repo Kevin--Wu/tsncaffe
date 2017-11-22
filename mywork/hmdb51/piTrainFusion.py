@@ -116,19 +116,31 @@ def train_fusion():
 	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionlabel","r") as fusionlabel:
 		listLabel = pickle.load(fusionlabel)
 
-    arrayShape = listOutput.shape
-    print listLabel.shape
-    nVideoNum = arrayShape[0]
-    nId = 0
-    # while nId < nVideoNum:
-    # 	nId += 1
+	arrayShape = listOutput.shape
+	nVideoNum = len(listLabel)
+	nId = 0
+	listweight = [ [ 0.5 for listYid in range(51) ] for listXid in range(2) ]
+    while nId < nVideoNum:
+    	nVideoType = listLabel[nId]
+    	rgbout = listOutput[2*nId - 1]
+    	flowout = listOutput[2*nId]
+
+    	out = rgbout
+		for nOutid in range(0, len(rgbout[0,0])):
+			out[0,0,nOutid] = rgbout[0,0,nOutid] * listweight[0][nOutid] + flowout[0,0,nOutid] * listweight[1][nOutid]
+    	prob=out.argmax()
+		print (prob, nVideoType)
+		if prob == nVideoType:
+			train_fusion_weight(out, rgbout, flowout, listweight)
+
+		nId += 1
 
 
 
 def train_fusion_weight(out, rgbout, flowout, listweight):
     nProbId = out.argmax()
-    nRgbout = rgbout[0,0,0,nProbId]
-    nFlowout = flowout[0,0,0,nProbId]
+    nRgbout = rgbout[0,0,nProbId]
+    nFlowout = flowout[0,0,nProbId]
     
     listweight[0][nProbId] = nRgbout / ( nRgbout + nFlowout )
     listweight[1][nProbId] = nFlowout / ( nRgbout + nFlowout )
