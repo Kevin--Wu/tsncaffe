@@ -14,7 +14,7 @@ szFlowSplitName = "flow-split1"
 szTrainsplit = "TrainSplit1"
 szWeightfilename = "fusionweight1"
 nFlowLength = 5
-nEpochsize = 1
+nEpochsize = 100
 
 
 def record_fusion():
@@ -118,27 +118,33 @@ def train_fusion():
 
 	arrayShape = listOutput.shape
 	nVideoNum = len(listLabel)
-	nId = 0
 	listweight = [ [ 0.5 for listYid in range(51) ] for listXid in range(2) ]
-	while nId < nVideoNum:
-		nVideoType = listLabel[nId]
-		rgbout = listOutput[2*nId - 1]
-		flowout = listOutput[2*nId]
+	nepochnum = 1
 
-		out = rgbout
-		for nOutid in range(0, len(rgbout[0,0])):
-			out[0,0,nOutid] = rgbout[0,0,nOutid] * listweight[0][nOutid] + flowout[0,0,nOutid] * listweight[1][nOutid]
-		prob=out.argmax()
-		print (prob, nVideoType)
-		if prob == nVideoType:
-			train_fusion_weight(out, rgbout, flowout, listweight)
+	while nepochnum <= nEpochsize:
+		nId = 0
+		while nId < nVideoNum:
+			nVideoType = listLabel[nId]
+			rgbout = listOutput[2*nId - 1]
+			flowout = listOutput[2*nId]
 
-		nId += 1
+			out = rgbout
+			for nOutid in range(0, len(rgbout[0,0])):
+				out[0,0,nOutid] = rgbout[0,0,nOutid] * listweight[0][nOutid] + flowout[0,0,nOutid] * listweight[1][nOutid]
+			prob=out.argmax()
+			# print (prob, nVideoType)
+			if prob == nVideoType:
+				train_fusion_weight(prob, rgbout, flowout, listweight)
+
+			nId += 1
+		nepochnum += 1
+		print nepochnum
 
 
 
-def train_fusion_weight(out, rgbout, flowout, listweight):
-    nProbId = out.argmax()
+
+def train_fusion_weight(prob, rgbout, flowout, listweight):
+    nProbId = prob
     nRgbout = rgbout[0,0,nProbId]
     nFlowout = flowout[0,0,nProbId]
     
