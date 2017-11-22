@@ -44,6 +44,7 @@ def record_fusion():
 
 	nepochnum = 1
 	listOutput = None
+	listLabel = list()
 
 	while nepochnum <= nEpochsize:
 		for szLine in listVideoNameType:
@@ -73,25 +74,26 @@ def record_fusion():
 
 			i=1
 			while i <= nRgbFramenum - nFlowLength + 1:
-				rgbout = rgb_video_predict_commit(i, szRgbCurVideoPath, rgbnet, rgbtransformer)
-				flowout = flow_video_predict_commit(i, szFlowCurVideoPath, flownet, flowtransformer)
+				# rgbout = rgb_video_predict_commit(i, szRgbCurVideoPath, rgbnet, rgbtransformer)
+				# flowout = flow_video_predict_commit(i, szFlowCurVideoPath, flownet, flowtransformer)
 				# out = rgbout
 				# for nId in range(0, len(rgbout[0,0,0])):
 				# 	out[0,0,0,nId] = rgbout[0,0,0,nId] * listweight[0][nId] + flowout[0,0,0,nId] * listweight[1][nId]
 
-			        out = rgbout + flowout
-				prob=out.argmax()
-				print (prob, nVideoType)
+				# out = rgbout + flowout
+				# prob=out.argmax()
+				# print (prob, nVideoType)
 				# if prob == nVideoType:
 				# 	train_fusion_weight(out, rgbout, flowout, listweight)
 				# 	nAcnum+=1
 				# nTotal+=1
-				if listOutput is not None:
-					listOutput = np.concatenate((listOutput, rgbout), axis = 0)
-					listOutput = np.concatenate((listOutput, flowout), axis = 0)
-				else:
-					listOutput = rgbout
-					listOutput = np.concatenate((listOutput, flowout), axis = 0)
+				# if listOutput is not None:
+				# 	listOutput = np.concatenate((listOutput, rgbout), axis = 0)
+				# 	listOutput = np.concatenate((listOutput, flowout), axis = 0)
+				# else:
+				# 	listOutput = rgbout
+				# 	listOutput = np.concatenate((listOutput, flowout), axis = 0)
+				listLabel.append(nVideoType)
                                 
 
 				i+=2
@@ -99,8 +101,10 @@ def record_fusion():
 		nepochnum += 1
                 print nepochnum
 
-	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionoutput","w") as fusionoutput:
-		pickle.dump(listOutput, fusionoutput)
+	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionlabel","w") as fusionlabel:
+		pickle.dump(listLabel, fusionlabel)
+	# with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionoutput","w") as fusionoutput:
+	# 	pickle.dump(listOutput, fusionoutput)
 
 	#print nAcnum, nTotal, nAcnum*1.0/nTotal
 	return
@@ -110,7 +114,10 @@ def train_fusion():
     with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionoutput","r") as fusionoutput:
         listOutput = pickle.load(fusionoutput)
     arrayShape = listOutput.shape
-    print arrayShape[0]
+    nVideoNum = arrayShape[0]
+    nId = 0
+    while nId < nVideoNum:
+    	nId += 1
 
 
 
@@ -183,6 +190,6 @@ def flow_video_predict_commit(i, szCurVideoPath, net, transformer):
 
 #rgb_video_predict()
 #flow_video_predict()
-#record_fusion()
-train_fusion()
+record_fusion()
+#train_fusion()
 print "OK"
