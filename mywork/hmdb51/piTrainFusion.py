@@ -14,7 +14,7 @@ szFlowSplitName = "flow-split1"
 szTrainsplit = "TrainSplit1"
 szWeightfilename = "fusionweight1"
 nFlowLength = 5
-nEpochsize = 50
+nEpochsize = 1
 
 
 def record_fusion():
@@ -79,36 +79,37 @@ def record_fusion():
 				# for nId in range(0, len(rgbout[0,0,0])):
 				# 	out[0,0,0,nId] = rgbout[0,0,0,nId] * listweight[0][nId] + flowout[0,0,0,nId] * listweight[1][nId]
 
-				# out = rgbout + flowout
-				# prob=out.argmax()
-				# #print (prob, nVideoType)
+			        out = rgbout + flowout
+				prob=out.argmax()
+				print (prob, nVideoType)
 				# if prob == nVideoType:
 				# 	train_fusion_weight(out, rgbout, flowout, listweight)
 				# 	nAcnum+=1
 				# nTotal+=1
-				if listOutput:
-					listOutput.concatenate((listOutput, rgbout), axis = 0)
-					listOutput.concatenate((listOutput, flowout), axis = 0)
+				if listOutput is not None:
+					listOutput = np.concatenate((listOutput, rgbout), axis = 0)
+					listOutput = np.concatenate((listOutput, flowout), axis = 0)
 				else:
 					listOutput = rgbout
-					listOutput.concatenate((listOutput, flowout), axis = 0)
-				print listOutput
-				print listOutput.ndim
-				print rgbout.ndim, "   ", flowout.ndim
-				return
-
+					listOutput = np.concatenate((listOutput, flowout), axis = 0)
+                                
 
 				i+=2
 
 		nepochnum += 1
                 print nepochnum
 
-	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/{}".format(szWeightfilename),"w") as fusionweight:
-		pickle.dump(listweight, fusionweight)
+	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionoutput","w") as fusionoutput:
+		pickle.dump(listOutput, fusionoutput)
 
-	print nAcnum, nTotal, nAcnum*1.0/nTotal
+	#print nAcnum, nTotal, nAcnum*1.0/nTotal
 	return
 
+
+def train_fusion():
+    with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionoutput","r") as fusionoutput:
+        listOutput = pickle.load(fusionoutput)
+    print listOutput
 
 
 def train_fusion_weight(out, rgbout, flowout, listweight):
@@ -180,5 +181,6 @@ def flow_video_predict_commit(i, szCurVideoPath, net, transformer):
 
 #rgb_video_predict()
 #flow_video_predict()
-fusion_predict()
+record_fusion()
+#train_fusion()
 print "OK"
