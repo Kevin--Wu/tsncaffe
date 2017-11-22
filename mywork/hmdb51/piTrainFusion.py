@@ -99,7 +99,7 @@ def record_fusion():
 				i+=2
 
 		nepochnum += 1
-                print nepochnum
+		print nepochnum
 
 	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionlabel","w") as fusionlabel:
 		pickle.dump(listLabel, fusionlabel)
@@ -111,13 +111,17 @@ def record_fusion():
 
 
 def train_fusion():
-    with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionoutput","r") as fusionoutput:
-        listOutput = pickle.load(fusionoutput)
+	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionoutput","r") as fusionoutput:
+		listOutput = pickle.load(fusionoutput)
+	with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionlabel","r") as fusionlabel:
+		listLabel = pickle.load(fusionlabel)
+
     arrayShape = listOutput.shape
+    print listLabel.shape
     nVideoNum = arrayShape[0]
     nId = 0
-    while nId < nVideoNum:
-    	nId += 1
+    # while nId < nVideoNum:
+    # 	nId += 1
 
 
 
@@ -190,6 +194,6 @@ def flow_video_predict_commit(i, szCurVideoPath, net, transformer):
 
 #rgb_video_predict()
 #flow_video_predict()
-record_fusion()
-#train_fusion()
+#record_fusion()
+train_fusion()
 print "OK"
