@@ -109,7 +109,9 @@ def record_fusion():
 def train_fusion():
     with open("/home/hadoop/whx/tsncaffe/mywork/hmdb51/fusionoutput","r") as fusionoutput:
         listOutput = pickle.load(fusionoutput)
-    print listOutput
+    arrayShape = listOutput.shape
+    print arrayShape[0]
+
 
 
 def train_fusion_weight(out, rgbout, flowout, listweight):
@@ -181,6 +183,6 @@ def flow_video_predict_commit(i, szCurVideoPath, net, transformer):
 
 #rgb_video_predict()
 #flow_video_predict()
-record_fusion()
-#train_fusion()
+#record_fusion()
+train_fusion()
 print "OK"
