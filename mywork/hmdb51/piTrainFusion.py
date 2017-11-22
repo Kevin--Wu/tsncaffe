@@ -120,15 +120,15 @@ def train_fusion():
 	nVideoNum = len(listLabel)
 	nId = 0
 	listweight = [ [ 0.5 for listYid in range(51) ] for listXid in range(2) ]
-    while nId < nVideoNum:
-    	nVideoType = listLabel[nId]
-    	rgbout = listOutput[2*nId - 1]
-    	flowout = listOutput[2*nId]
+	while nId < nVideoNum:
+		nVideoType = listLabel[nId]
+		rgbout = listOutput[2*nId - 1]
+		flowout = listOutput[2*nId]
 
-    	out = rgbout
+		out = rgbout
 		for nOutid in range(0, len(rgbout[0,0])):
 			out[0,0,nOutid] = rgbout[0,0,nOutid] * listweight[0][nOutid] + flowout[0,0,nOutid] * listweight[1][nOutid]
-    	prob=out.argmax()
+		prob=out.argmax()
 		print (prob, nVideoType)
 		if prob == nVideoType:
 			train_fusion_weight(out, rgbout, flowout, listweight)
